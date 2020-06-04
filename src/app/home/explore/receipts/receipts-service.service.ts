@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Receipt } from './receipts.model';
 import { Plugins } from '@capacitor/core';
+import { ReturnStatement } from '@angular/compiler';
 
 
 
@@ -26,12 +27,15 @@ export class ReceiptsServiceService implements OnInit {
   userReceipts = [];
   handler;
   xhr;
+
   constructor(private http: HttpClient, private authService: AuthServiceService) { }
 
+  // tslint:disable-next-line: variable-name
   private _userReceipts = new BehaviorSubject<any>(null);
 
   baseUrl = 'https://fleeks.herokuapp.com/api/receipt_image/';
   postBaseurl = 'https://fleeks.herokuapp.com/api/receipts/';
+  deleteBaseUrl = 'https://fleeks.herokuapp.com/api/delete_receipt/'
 
   ngOnInit() {
   }
@@ -119,7 +123,9 @@ export class ReceiptsServiceService implements OnInit {
     return this.userReceipts;
   }
 
+  // tslint:disable-next-line: variable-name
   uplaodUserReceipt(image, total_spending, category, userTokens) {
+
      // format the data before attaching it to the http-request
     const data = new FormData();
     console.log('this is the image', image);
@@ -127,74 +133,22 @@ export class ReceiptsServiceService implements OnInit {
     data.append('total_spending', total_spending);
     data.append('category', category);
 
-    const myheaders = new HttpHeaders();
-    myheaders.append('Content-Type', 'multipart/form-data');
-    myheaders.append('Authorization', userTokens),
-    myheaders.append('Access-Control-Allow-Origin', 'http://localhost:8100');
-    myheaders.append('Access-Control-Allow-Headers', 'Content-Type');
-
-    const headerz = new HttpHeaders({
-      'Content-Type': 'multipart/form-data',
-      Authorization:   userTokens,
-
-    });
-
-    const headers = new Headers({
-      Accept: 'multipart/form-data',
-      enctype: 'multipart/form-data',
-      Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzYsImV4cCI6MTU5MDcxOTg0NH0.rmeppwEBsym0kMnb4SZk4jBEUqkiRyaCeF-YO43O06k',
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    });
-
-    const headerx = new HttpHeaders({
-      'Access-Control-Allow-Origin': 'http://localhost:8100',
-      'Content-Type': 'multipart/form-data',
-      Authorization:   userTokens,
-
-   });
-
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'multipart/form-data',
-        // Accept:  'multipart/form-data',  
-        Authorization:   userTokens,
-       //'Access-Control-Allow-Origin': 'http://localhost:8100',
-       // 'Access-Control-Expose-Headers': 'Authorization, Access-Control-Allow-Origin',
-      })
-    };
-
-    // this.http.post(this.postBaseurl, data, httpOptions).subscribe(res => {
-    //    console.log(res);
-    //  });
-
     const xhr = new XMLHttpRequest();
-    
     const url = this.postBaseurl;
     xhr.open('POST', url, true);
-    // xhr.setRequestHeader('Accept', 'multipart/form-data');
-    xhr.setRequestHeader( 'authorization', userTokens );
-    // xhr.setRequestHeader('Access-Control-Allow-origin', 'http://localhost:8100');
-    xhr.setRequestHeader('Content-Type',  'application/json');
-    xhr.setRequestHeader('Origin', 'http://localhost:8100');
-    // xhr.setRequestHeader('Access-Control-Request-Method', 'POST');
-    // xhr.setRequestHeader('Access-Control-Request-Headers', 'Origin, Content-Type');
+    xhr.setRequestHeader( 'Authorization', 'Token ' + userTokens );
     xhr.withCredentials = true;
     return xhr.send(data);
 
-  //   let myHeaders = new HttpHeaders();
-  //   myHeaders = myHeaders.set('Content-Type',  'multipart/form-data');
-  //   myHeaders = myHeaders.set('Authorization',   userTokens);
+    }
 
-  //   return this.http.post(this.postBaseurl, {body: data, headers: myHeaders }).subscribe(res => {
-  //     console.log(res);
-  //     });
+
+    deleteReceipt(pk) {
+     return this.http.delete(`${this.deleteBaseUrl}${pk}/`).subscribe(resData => {
+       // returns errors
+     });
     }
 
 
 }
-// 'Access-Control-Allow-Origin': '*',
-// 'Content-Type': 'multipart/form-data',
-// Authorization: 'Token ' +  userToken,
-// 'Access-Control-Allow-Headers': 'Content-Type',
+

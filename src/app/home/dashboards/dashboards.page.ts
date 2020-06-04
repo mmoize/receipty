@@ -3,6 +3,8 @@ import { ReceiptsServiceService } from './../explore/receipts/receipts-service.s
 import { Component, OnInit } from '@angular/core';
 import { Receipt } from '../explore/receipts/receipts.model';
 import { SegmentChangeEventDetail } from '@ionic/core';
+import { ModalController } from '@ionic/angular';
+import { ViewimageComponent } from 'src/app/shared/viewimage/viewimage.component';
 
 @Component({
   selector: 'app-dashboards',
@@ -14,7 +16,8 @@ export class DashboardsPage implements OnInit {
   public userReceipts = [];
   userImage = [];
   constructor(private receiptService: ReceiptsServiceService,
-              private authService: AuthServiceService
+              private authService: AuthServiceService,
+              private modalCtrl: ModalController,
               ) { }
 
   ngOnInit() {
@@ -54,5 +57,18 @@ export class DashboardsPage implements OnInit {
       this.userReceipts = [''];
     }
   }
+
+  openViewimageModal(Receipt) {
+    this.modalCtrl.create({
+      component: ViewimageComponent,
+      componentProps: {userReceipt: Receipt}
+    }).then(modalEl => {
+      modalEl.present();
+      return modalEl.onDidDismiss();
+    });
+  }
+
+  
+
 
 }

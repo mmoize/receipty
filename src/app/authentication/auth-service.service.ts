@@ -5,11 +5,13 @@ import * as jwt_decode from 'jwt-decode';
 
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { User } from './user.model';
 import { map, tap, filter } from 'rxjs/operators';
 
 import { Plugins } from '@capacitor/core';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 export interface AuthResponseData {
@@ -26,12 +28,18 @@ export interface AuthResponseData {
 })
 export class AuthServiceService implements OnDestroy {
 
-  constructor(private http: HttpClient, private profileserivice: ProfileserviceService) { }
+  constructor(private http: HttpClient,
+              private profileserivice: ProfileserviceService,
+              private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController,
+              private router: Router ,
+              ) { }
 
   // tslint:disable-next-line: variable-name
   private _user = new BehaviorSubject<User>(null);
   private activeLogoutTimer: any;
-
+  isLogin = true;
+  isLoading = false;
 
   baseUrl = 'https://fleeks.herokuapp.com/api/users/';
 
@@ -156,6 +164,8 @@ export class AuthServiceService implements OnDestroy {
       this.logout();
     }, duration);
   }
+
+
 
   signup(email: string,  password: string, username: string, ) {
     return this.http.post<AuthResponseData>(this.baseUrl, {email, password, username})
