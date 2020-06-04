@@ -1,3 +1,41 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="m1">
+    <ion-header >
+      <ion-toolbar color="primary">
+        <ion-title>
+          <ion-label>Receity</ion-label>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content >
+      <ion-list>
+       <ion-menu-toggle>
+        <ion-item routerLink="/home/explore/receipts">
+          <ion-icon name="home-outline" color="secondary" slot="start"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+       </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/home/profile">
+            <ion-icon name="person-outline" color="secondary" slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/home/dashboards">
+            <ion-icon name="albums-outline" color="secondary"  slot="start"></ion-icon>
+            <ion-label>Dashboard</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item  (click)="onLogout()" button>
+            <ion-icon name="log-out-outline" color="secondary" slot="start"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>

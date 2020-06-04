@@ -1,0 +1,53 @@
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm= "2"  >
+        <ion-card>
+          <div  class="contact-card">
+            <ion-card-header class="contact-card__header-image"> 
+              <div class="contact-card__avatar" style="background-image: []">
+                  <img style='height: 100%; width: 100%; border-radius: 100%; object-fit: cover'  [src]="imageString"/>
+              </div>
+            </ion-card-header>
+            <p class="contact-card__name">{{ userProfile?.username }}</p>
+            <div class="contact-card__footer">
+              <div class="contact-card__footer__core">
+              
+                <ion-card color="light" class="contact-card__footer__core__email">
+                  <ion-card-header>
+                    <ion-card-title>Bio:</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    {{ userProfile?.bio }}
+                  </ion-card-content>
+                </ion-card>
+    
+                <ion-card  class="contact-card__footer__core__email">
+                  <ion-card-header>
+                    <ion-card-title>City</ion-card-title>
+                  </ion-card-header>
+    
+                  <ion-card-content >
+                    {{ userProfile?.city }}
+                  </ion-card-content>
+                </ion-card>
+    
+                <ion-card  class="contact-card__footer__core__email">
+                  <ion-card-header>
+                    <ion-card-title> Country</ion-card-title>
+                  </ion-card-header>
+                  
+                   <ion-card-content>
+                    {{ userProfile?.country }}
+                   </ion-card-content>
+                </ion-card>
+              </div>
+            </div>
+           </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

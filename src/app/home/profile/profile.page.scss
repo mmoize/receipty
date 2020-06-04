@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
+
+@mixin transition--smooth{
+    transition: 0.125s ease-in-out;
+    -webkit-transition: 0.125s ease-in-out;
+    -moz-transition: 0.125s ease-in-out;
+  }
+  
+  :root{
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body{
+    width:14rem;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #EEEEEE;
+  }
+  
+  // ---------- C O N T A C T - C A R D ----------
+
+
+  
+  .contact-card{
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 1em;
+    box-shadow: 0 0 2em rgba(0,0,0,0.125);
+    overflow: hidden;
+    flex-direction: column;
+    @include transition--smooth;
+  
+      &:hover{
+        transform: translateY(-0.5em);
+      }
+  
+      &__header-image{
+        width: 100%;
+        height: 15em;
+        padding-top: 1em;
+        background-size: cover;
+        background-color: #FAFAFA;
+        flex: 0; 
+        background-image: url("https://cdn1.vectorstock.com/i/1000x1000/49/55/modern-purple-liquid-color-background-vector-25014955.jpg");
+        
+        object-fit: cover;
+      }
+  
+      &__avatar{
+        width: 10em;
+        height: 10em;
+        margin: auto;
+     
+        background-size: cover;
+        background-color: #EEEEEE;
+        border-radius: 100%;
+        object-fit: contain;
+        flex: 1;
+        margin-top: 8.5em;
+        
+      }
+  
+      &__name{
+        margin-top:  4em;
+        margin-bottom: .5em;
+        font-size: 1.5rem;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        
+      }
+  
+      &__link{
+        display: block;
+        padding: .5em 1em;
+        text-decoration: none;
+  
+        a{
+          color: #424242;
+          text-decoration: none;
+        }
+  
+        &:hover{
+          background-color: #FAFAFA;
+        }
+  
+      }
+  
+      &__footer{
+          margin-top: .5em;
+          padding: 1em 0;
+          background-color: #FAFAFA;
+  
+        &__link{
+          display: inline-block;
+          margin-right: 1em;
+          font-size: 1.125rem;
+          @include transition--smooth;
+  
+          a{
+            color: #424242;
+          }
+  
+          &--dribbble{
+            margin-right: 0;
+          }
+  
+          &:hover{
+            transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            -moz-transform: scale(1.5);
+          }
+  
+        }
+
+        &__core {
+          &__email{
+            display: block;
+            text-align: left;
+            margin-top: 5px;
+            border: none;
+            box-shadow: none !important;
+            border: none !important;
+          }
+        }
+
+  
+      }
+
+      h4{
+        font-weight: bold;
+        font-family: 'Quicksand', sans-serif;
+      }
+      h3{
+        font-weight: bold;
+        font-family: 'Quicksand', sans-serif;
+      }
+
+      ion-card {
+
+      }
+      
+      ion-card-header {
+
+      }
+
+
+
+     
+
+      
+  
+  }
+
+
+
+
+

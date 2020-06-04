@@ -1,5 +1,8 @@
 {
   "name": "receity",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }

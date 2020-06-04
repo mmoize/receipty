@@ -1,0 +1,79 @@
+<ion-buttons slot="start">
+  <ion-menu-button menu="m1"></ion-menu-button>
+</ion-buttons>
+
+<ion-content>
+<ion-grid>
+  <div *ngIf="!showImageReceipt"  tex-center>
+    <ion-slides pager="true" [options]="slideOpts" >
+      <ion-slide>
+        <ion-item (click)="onPickImage()" lines="none" text-center>
+          <ion-card class="divcard" text-center>
+            <ion-card-title ><h1>Receipt</h1></ion-card-title>
+            <ion-card-content>
+              <ion-icon color="primary" name="camera-outline"></ion-icon>
+            </ion-card-content>
+         </ion-card>
+        </ion-item>
+      </ion-slide>
+      <ion-slide>
+        <ion-item routerLink="/home/dashboards">
+            <ion-card class="divcard">
+              <ion-card-title ><h1>Dashboard</h1></ion-card-title>
+              <ion-card-content>
+                <ion-icon color="tertiary" name="cash-outline"></ion-icon>
+              </ion-card-content>
+          </ion-card>
+        </ion-item>
+      </ion-slide>  
+      <ion-slide>
+        <ion-item routerLink="/home/dashboards">
+            <ion-card class="divcard">
+              <ion-card-title ><h1>Total</h1></ion-card-title>
+              <ion-card-content>
+                <ion-icon color="secondary" name="barcode-outline"></ion-icon>
+              </ion-card-content>
+           </ion-card>
+        </ion-item>
+      </ion-slide>
+    </ion-slides>
+      <input type="file" *ngIf="usePicker" #filePicker (change)="onFileChosen($event)" />   
+    <ion-input ></ion-input>
+  </div>
+</ion-grid>
+<ion-row *ngIf="showImageReceipt">
+  <ion-col  size-md = "6" offset-md ="3">
+      <ion-card  class="imgcol">
+          <ion-img 
+          role="button"
+          class="image" 
+          [src]="selectedImage" >
+        </ion-img>
+        <ion-card-content>
+          <form [formGroup]="form"> 
+          <ion-list>
+            <ion-item lines="none">
+              <ion-label>
+                Total Spending
+              </ion-label>
+              <ion-input formControlName="total_spending" placeholder="$"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item lines="none">
+              <ion-label>
+                Category
+              </ion-label>
+              <ion-input formControlName="category" placeholder="put category"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-button expand="block" color="primary" (click)="onProceed()">
+            <h3>Proceed</h3>
+          </ion-button>
+        </form>
+        </ion-card-content>
+
+      </ion-card>
+  </ion-col>
+</ion-row>
+</ion-content>

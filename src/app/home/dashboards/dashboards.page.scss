@@ -1,0 +1,114 @@
+
+
+
+p {
+  margin-left: 50px;
+  width: 20vw;
+  background-color: transparent;
+}
+
+ion-item {
+  text-align: center;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  --background: transparent;
+}
+
+
+ion-icon {
+  font-size: 20px; //Preferred size here
+}
+
+ion-grid {
+  height: 100vh;
+
+}
+
+ion-segment-button {
+ background-color: #6370ff;
+}
+
+ion-card {
+
+  display: inline-block;
+  padding: 0px;
+  width: fit-content;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+ion-label:nth-child(1) {
+  font-family: monospace;
+}
+
+
+#icons1 {
+  background-color: transparent;
+  background: transparent;
+  
+}
+#icons2 {
+  background-color: transparent;
+  background: transparent;
+  padding-left: 60%;
+}
+
+
+
+#bottom-row > ion-col:nth-child(1) > button {
+  padding: 0px;
+  background: transparent;
+}
+
+#bottom-row > ion-col:nth-child(2) > button {
+  padding: 0px;
+  background: transparent;
+}
+
+ion-label {
+  --background: transparent;
+  text-align: left;
+}
+
+div.item-native {
+  --background: transparent;
+}
+
+ion-list {
+  padding: 0px;
+  margin: 0px;
+  height: 20%;
+}
+
+.list-md {
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
+}
+
+
+.list-ios {
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
+}
+
+ion-card-content {
+  height: fit-content;
+  padding: 0px;
+}
+
+ion-icon {
+  size: 60px;
+}
+
+
+#segment1 {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+#segment3 {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

@@ -1,0 +1,41 @@
+<ion-content class="masters">
+  <ion-grid>
+    <form [formGroup]="form">
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+       <ion-card >
+         <ion-card-header color="primary"  text-center > 
+           <ion-card-title>
+            <ion-label>
+              <h1>Authentication</h1>
+            </ion-label>
+           </ion-card-title>
+         </ion-card-header>
+         <ion-card-content>
+           <ion-col size-md="6" offset-md="3">
+            <ion-item>
+              <ion-input type="text" *ngIf="!islogin" formControlName="username" placeholder="username"></ion-input>
+             </ion-item>
+             <ion-item>
+              <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+             </ion-item>
+             <ion-item>
+              <ion-input type="password" formControlName="password" placeholder="password"></ion-input>
+             </ion-item>
+           </ion-col >
+            <ion-button (click)="switchAuthentication()" expand="full" fill="none" color="success" >
+              <h3>switch to {{ islogin ? 'signup' : 'Login' }}</h3>
+            </ion-button>
+
+         </ion-card-content>
+         <ion-card-subtitle>
+                <ion-button (click)="authenticate()" expand="block" color="primary" >
+                  <h3>{{ islogin ? 'Login' : 'Signup' }}</h3>
+                </ion-button>
+         </ion-card-subtitle>
+       </ion-card>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-grid>
+</ion-content>
