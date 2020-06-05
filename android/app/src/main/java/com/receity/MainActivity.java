@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.receity;
 
 import android.os.Bundle;
 
