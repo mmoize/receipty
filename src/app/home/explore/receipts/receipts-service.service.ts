@@ -31,7 +31,7 @@ export class ReceiptsServiceService implements OnInit {
   constructor(private http: HttpClient, private authService: AuthServiceService) { }
 
   // tslint:disable-next-line: variable-name
-  private _userReceipts = new BehaviorSubject<any>(null);
+  private _userReceipts = new BehaviorSubject<Receipt>(null);
 
   baseUrl = 'https://fleeks.herokuapp.com/api/receiptview/';
   postBaseurl = 'https://fleeks.herokuapp.com/api/receipts/';
@@ -50,34 +50,47 @@ export class ReceiptsServiceService implements OnInit {
     }).subscribe(results => {
       // this.setReceiptData(nads);
       this.userReceipts.push(results);
+      this. proccessedResults(results);
     });
 
   }
 
+  proccessedResults(receiptData) {
+    let incomingData = [];
+    incomingData = receiptData;
+    console.log('this is the incoming data', incomingData);
+    const dataReceipt = [];
+    for (const key of incomingData) {
+      dataReceipt.push(key);
+      this.setReceiptData(key);
+   }
+  }
+    
+
 
  setReceiptData(receiptData) {
-    const rawData = JSON.stringify(receiptData);
-    const parsedData = JSON.parse(rawData);
-    const theId = parsedData.id;
-    const theImage = parsedData.image;
-    const theUser = parsedData.user;
+
     // tslint:disable-next-line: variable-name
     const userReceipt_Data = new Receipt(
-      receiptData.id = theId,
-      receiptData.image = theImage,
-      receiptData.user = theUser
+      receiptData.pk,
+      receiptData.user,
+      receiptData.total_spending,
+      receiptData.category,
+      receiptData.tags,
+      receiptData.receipt_image_set,
+      receiptData.created_at
     );
     console.log('this is the setreceiptdata', receiptData);
-    this._userReceipts.next(parsedData);
-    this.StoreUserReceiptData(
-      receiptData.id
-    );
+    this._userReceipts.next(userReceipt_Data);
+    this.StoreUserReceiptData(userReceipt_Data);
+    
   }
 
   /// data  is undifined in this function
   private StoreUserReceiptData(receData) {
     const data = JSON.stringify(receData);
     Plugins.Storage.set({key: 'userReceiptData', value: data});
+
   }
 
   clearReceiptData() {
@@ -86,6 +99,7 @@ export class ReceiptsServiceService implements OnInit {
   }
 
   async loadedReceipts() {
+    console.log('this is the set', this._userReceipts);
     return this.userReceipts;
   }
 
@@ -111,7 +125,7 @@ export class ReceiptsServiceService implements OnInit {
 
     deleteReceipt(pk) {
      return this.http.delete(`${this.deleteBaseUrl}${pk}/`).subscribe(resData => {
-       // returns errors
+       this._userReceipts
      });
     }
 

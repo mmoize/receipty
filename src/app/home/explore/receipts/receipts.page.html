@@ -5,40 +5,46 @@
 <ion-content>
 <ion-grid>
   <div *ngIf="!showImageReceipt"  tex-center>
-    <ion-slides pager="true" [options]="slideOpts" >
-      <ion-slide>
-        <ion-item (click)="onPickImage()" lines="none" text-center>
-          <ion-card class="divcard" text-center>
-            <ion-card-title ><h1>Receipt</h1></ion-card-title>
-            <ion-card-content>
-              <ion-icon color="primary" name="camera-outline"></ion-icon>
-            </ion-card-content>
-         </ion-card>
-        </ion-item>
-      </ion-slide>
-      <ion-slide>
-        <ion-item routerLink="/home/dashboards">
-            <ion-card class="divcard">
-              <ion-card-title ><h1>Dashboard</h1></ion-card-title>
-              <ion-card-content>
-                <ion-icon color="tertiary" name="cash-outline"></ion-icon>
-              </ion-card-content>
-          </ion-card>
-        </ion-item>
-      </ion-slide>  
-      <ion-slide>
-        <ion-item routerLink="/home/dashboards">
-            <ion-card class="divcard">
-              <ion-card-title ><h1>Total</h1></ion-card-title>
-              <ion-card-content>
-                <ion-icon color="secondary" name="barcode-outline"></ion-icon>
-              </ion-card-content>
-           </ion-card>
-        </ion-item>
-      </ion-slide>
-    </ion-slides>
-      <input type="file" *ngIf="usePicker" #filePicker (change)="onFileChosen($event)" />   
-    <ion-input ></ion-input>
+   <ion-row>
+     <ion-col size ="12" size-sm="8" offset-sm ="2" text-center>
+           <ion-card-content>
+            <ion-slides pager="true" [options]="slideOpts" >
+              <ion-slide>
+                <ion-item (click)="onPickImage()" lines="none" text-center>
+                  <ion-card class="divcard" text-center>
+                    <ion-card-title ><h1>Receipt</h1></ion-card-title>
+                    <ion-card-content>
+                      <ion-icon color="primary" name="camera-outline"></ion-icon>
+                    </ion-card-content>
+                 </ion-card>
+                </ion-item>
+              </ion-slide>
+              <ion-slide>
+                <ion-item routerLink="/home/dashboards">
+                    <ion-card class="divcard">
+                      <ion-card-title ><h1>Dashboard</h1></ion-card-title>
+                      <ion-card-content>
+                        <ion-icon color="tertiary" name="cash-outline"></ion-icon>
+                      </ion-card-content>
+                  </ion-card>
+                </ion-item>
+              </ion-slide>  
+              <ion-slide>
+                <ion-item routerLink="/home/dashboards">
+                    <ion-card class="divcard">
+                      <ion-card-title ><h1>Total</h1></ion-card-title>
+                      <ion-card-content>
+                        <ion-icon color="secondary" name="barcode-outline"></ion-icon>
+                      </ion-card-content>
+                   </ion-card>
+                </ion-item>
+              </ion-slide>
+            </ion-slides>
+              <input type="file" *ngIf="usePicker" #filePicker (change)="onFileChosen($event)" />   
+            <ion-input ></ion-input>
+           </ion-card-content>
+     </ion-col>
+   </ion-row>
   </div>
 </ion-grid>
 <ion-row *ngIf="showImageReceipt">

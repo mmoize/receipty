@@ -165,7 +165,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
 
   private captureImage() {
     if (! Capacitor.isPluginAvailable('Camera') || this.usePicker ) {
-      this.filePickeRef.nativeElement.click();
+     // this.filePickeRef.nativeElement.click();
       return;
     }
     Plugins.Camera.getPhoto({
@@ -219,6 +219,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   const image = this.postImage;
   console.log('image', image);
   this.receiptService.uplaodUserReceipt(image, this.form.value.total_spending, this.form.value.category, this._userToken);
+  this.showImageReceipt = false;
 
  }
 

@@ -23,7 +23,7 @@ export class DashboardsPage implements OnInit {
 
   ngOnInit() {
   }
-
+ 
   ionViewWillEnter() {
   this.loadReceipts();
   }
