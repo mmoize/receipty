@@ -9,7 +9,7 @@
           <ion-card-header>
             <ion-card-subtitle>{{ theSelectedReceipt.user.username }}</ion-card-subtitle>
           </ion-card-header>
-         <ion-img (click)="onCancel()" [src]="theSelectedReceipt.image"></ion-img>
+         <ion-img (click)="onCancel()" [src]="theSelectedReceipt.receipt_image_set[0].image"></ion-img>
          <ion-card-content>
            <ion-list>
              <ion-item lines="none">
@@ -17,7 +17,7 @@
                  Total Spending
                </ion-label>
                <ion-label text-right>
-                 $400
+                 {{ theSelectedReceipt.total_spending }}
                </ion-label>
              </ion-item>
            </ion-list>
@@ -27,14 +27,14 @@
                  Category
                </ion-label>
                <ion-label text-right>
-                 Transportation
+                 {{ theSelectedReceipt.category }}
                </ion-label>
              </ion-item>
            </ion-list>
            <ion-card-subtitle>
              <ion-row>
                <ion-col class="ion-align-self-start">
-                 <button id="icons1" ion-button icon-start clear large>
+                 <button  (click)=" onSaveReceipt(theSelectedReceipt.image)" id="icons1" ion-button icon-start clear large>
                    <ion-icon color="success" name="save"></ion-icon>
                  </button>
                </ion-col>

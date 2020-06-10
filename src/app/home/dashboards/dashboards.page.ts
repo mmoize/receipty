@@ -15,6 +15,7 @@ export class DashboardsPage implements OnInit {
 
   public userReceipts = [];
   userImage = [];
+  colo;
   constructor(private receiptService: ReceiptsServiceService,
               private authService: AuthServiceService,
               private modalCtrl: ModalController,
@@ -36,11 +37,12 @@ export class DashboardsPage implements OnInit {
 
   ionViewDidEnter() {
     this.receiptService.loadedReceipts().then(resData => {
-      const colo = [];
+     
+      this.colo = resData;
 
-      console.log('this is a key', colo );
+      console.log('this is a key-resData', this.colo);
       this.userReceipts = resData;
-      console.log('this is userReceipt..', this.userReceipts);
+      console.log('this is userReceipt..//', this.userReceipts);
       let colos = [];
       colos = this.userReceipts;
       // iterate of the list userReceipts

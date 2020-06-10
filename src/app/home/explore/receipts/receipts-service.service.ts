@@ -33,7 +33,7 @@ export class ReceiptsServiceService implements OnInit {
   // tslint:disable-next-line: variable-name
   private _userReceipts = new BehaviorSubject<any>(null);
 
-  baseUrl = 'https://fleeks.herokuapp.com/api/receipt_image/';
+  baseUrl = 'https://fleeks.herokuapp.com/api/receiptview/';
   postBaseurl = 'https://fleeks.herokuapp.com/api/receipts/';
   deleteBaseUrl = 'https://fleeks.herokuapp.com/api/delete_receipt/'
 
@@ -42,47 +42,13 @@ export class ReceiptsServiceService implements OnInit {
 
   loadUserReceipts(userToken) {
     const nads = [];
-    console.log('this is the user', userToken);
     return this.http.get<any>(this.baseUrl, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Token ' +  userToken,
       }
     }).subscribe(results => {
-      console.log('AAA the result', results);
-      const userData = [];
-      const another = [];
-
-      this.setReceiptData(nads);
-      const jala = [];
-      for (const keys of nads) {
-        jala.push({
-          key: 'id',
-          value:  keys[0].id
-        });
-        jala.push({
-          key: 'image',
-          value:  keys[0].image
-        });
-        jala.push({
-          key: 'user',
-          value:  keys[0].user
-        });
-      }
-      console.log('this is jalala', jala);
-
-      const imo = [];
-      const coco = [];
-      for (const key of jala) {
-        coco.push(key);
-      }
-      for (const key of coco) {
-        if (key.key === 'image') {
-          imo.push(key.value);
-        }
-
-      }
-      console.log('returning the images frm srvice..', imo);
+      // this.setReceiptData(nads);
       this.userReceipts.push(results);
     });
 
