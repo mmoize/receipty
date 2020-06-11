@@ -1,6 +1,6 @@
 import { ReceiptsServiceService } from './../../home/explore/receipts/receipts-service.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ReceiptImage } from './ReceiptImage.model';
 
@@ -41,7 +41,8 @@ export class ViewimageComponent implements OnInit {
 
   constructor(private modalCtrl: ModalController,
               private receiptService: ReceiptsServiceService,
-              private storage: Storage
+              private storage: Storage,
+              private loadingCtrl: LoadingController,
               ) { }
 
   ngOnInit() {}
@@ -55,7 +56,17 @@ export class ViewimageComponent implements OnInit {
   }
 
   onDelete(pk) {
-   this.receiptService.deleteReceipt(pk);
+   this.loadingCtrl.create({ message: 'Deleting your Receipt'}).then(loadingEl => {
+     loadingEl.present();
+     this.receiptService.deleteReceipt(pk);
+     this.modalCtrl.dismiss();
+     setTimeout(() => {
+       this.receiptService.loadUserReceipts().subscribe(() => {});
+    }, 2000);
+     loadingEl.dismiss();
+   });
+
+
   }
 
 
@@ -78,7 +89,7 @@ export class ViewimageComponent implements OnInit {
       console.log('Results: ', results);
       this.saveReceipt(results);
     });
-    this.tester = false
+    this.tester = false;
   }
 
 

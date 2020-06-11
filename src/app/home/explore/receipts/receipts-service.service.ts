@@ -1,7 +1,7 @@
 
 
 import { AuthServiceService } from './../../../authentication/auth-service.service';
-import { tap } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -24,35 +24,65 @@ export interface ReceiptData {
 })
 export class ReceiptsServiceService implements OnInit {
 
+  // tslint:disable-next-line: variable-name
+  private _userReceipts = new BehaviorSubject<Receipt[]>([]) ;
   userReceipts = [];
   handler;
   xhr;
 
-  constructor(private http: HttpClient, private authService: AuthServiceService) { }
+  constructor(private http: HttpClient,
+              private authService: AuthServiceService,
+              ) { }
 
-  // tslint:disable-next-line: variable-name
-  private _userReceipts = new BehaviorSubject<Receipt>(null);
 
   baseUrl = 'https://fleeks.herokuapp.com/api/receiptview/';
   postBaseurl = 'https://fleeks.herokuapp.com/api/receipts/';
-  deleteBaseUrl = 'https://fleeks.herokuapp.com/api/delete_receipt/'
+  deleteBaseUrl = 'https://fleeks.herokuapp.com/api/delete_receipt/';
+
+  get Receipts() {
+    return this._userReceipts.asObservable();
+  }
+
 
   ngOnInit() {
   }
 
-  loadUserReceipts(userToken) {
-    const nads = [];
-    return this.http.get<any>(this.baseUrl, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Token ' +  userToken,
-      }
-    }).subscribe(results => {
-      // this.setReceiptData(nads);
-      this.userReceipts.push(results);
-      this. proccessedResults(results);
-    });
-
+  loadUserReceipts() {
+    
+   return this. authService.userToken.pipe(switchMap(userToken => {
+      return this.http.get<any>(this.baseUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Token ' +  userToken,
+        }
+      }).pipe(map(resData => {
+        console.log('this is response', resData);
+        const receiptsData = [];
+        for (const key in resData) {
+            if (resData.hasOwnProperty(key)) {
+              receiptsData.push(new Receipt
+                (
+                  resData[key].pk,
+                  resData[key].user,
+                  resData[key].total_spending,
+                  resData[key].category,
+                  resData[key].tags,
+                  resData[key].receipt_image_set,
+                  new Date(resData[key].created_at)
+              ));
+            }
+          }
+        return receiptsData;
+      }),
+        tap(receiptData => {
+          this._userReceipts.next(receiptData);
+        })
+      );
+   }));
+    // .subscribe(results => {
+    //   this.userReceipts.push(results);
+    //   this. proccessedResults(results);
+    // });
   }
 
   proccessedResults(receiptData) {
@@ -81,7 +111,6 @@ export class ReceiptsServiceService implements OnInit {
       receiptData.created_at
     );
     console.log('this is the setreceiptdata', receiptData);
-    this._userReceipts.next(userReceipt_Data);
     this.StoreUserReceiptData(userReceipt_Data);
     
   }

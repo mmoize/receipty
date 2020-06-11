@@ -7,7 +7,7 @@
       <ion-item lines="none"  class="ion-no-padding"  >
         <ion-card color="primary"  class="ion-no-padding">
           <ion-card-header>
-            <ion-card-subtitle>{{ theSelectedReceipt.user.username }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ theSelectedReceipt.created_at }}</ion-card-subtitle>
           </ion-card-header>
          <ion-img (click)="onCancel()" [src]="theSelectedReceipt.receipt_image_set[0].image"></ion-img>
          <ion-card-content>

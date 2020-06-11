@@ -72,7 +72,7 @@
  </ion-row> -->
  
  <div class="pins">
-   <div class="pin" *ngFor="let receipt of userReceipts[0]" >
+   <div class="pin" *ngFor="let receipt of userReceipts" >
      <img [src]="receipt.receipt_image_set[0].image" (click)="openViewimageModal(receipt)"/>
    </div>
  </div>

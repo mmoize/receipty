@@ -1,3 +1,5 @@
+import { switchMap } from 'rxjs/operators';
+import { DashboardsPage } from './../../dashboards/dashboards.page';
 import { ReceiptsServiceService } from './receipts-service.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { CaptureReceiptsComponent } from './../../../shared/capture-receipts/capture-receipts.component';
@@ -6,7 +8,7 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from './../../../authentication/auth-service.service';
 import { Component, OnInit, OnDestroy, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
-import { ActionSheetController, Platform, ModalController } from '@ionic/angular';
+import { ActionSheetController, Platform, ModalController, LoadingController } from '@ionic/angular';
 import { Capacitor, Plugins, CameraSource, CameraResultType } from '@capacitor/core';
 
 @Component({
@@ -32,7 +34,10 @@ export class ReceiptsPage implements OnInit, OnDestroy {
               private modalCtrl: ModalController,
               private actionSheetCtrl: ActionSheetController,
               private receiptService: ReceiptsServiceService,
-              private profileService: ProfileserviceService) { }
+              private profileService: ProfileserviceService,
+              private loadingCtrl: LoadingController,
+              private dasboard: DashboardsPage,
+              ) { }
 
 
   private authSub: Subscription;
@@ -124,11 +129,6 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       }
       this.previousAuthState = isAuth;
     });
-
-    this.authService.returnUserToken().then(resultData => {
-      this._userToken = resultData;
-      this.receiptService.loadUserReceipts(this._userToken);
-    });
   }
 
   ngOnDestroy() {
@@ -211,16 +211,20 @@ export class ReceiptsPage implements OnInit, OnDestroy {
    });
  }
 
- loadReceipts() {
-
-}
 
  onProceed() {
-  const image = this.postImage;
-  console.log('image', image);
-  this.receiptService.uplaodUserReceipt(image, this.form.value.total_spending, this.form.value.category, this._userToken);
-  this.showImageReceipt = false;
-
+    this.loadingCtrl.create({keyboardClose: true, message: 'Uploading your receipt..'})
+    .then(loadingEl => {
+      loadingEl.present();
+      const image = this.postImage;
+      console.log('image', image);
+      this.receiptService.uplaodUserReceipt(image, this.form.value.total_spending, this.form.value.category, this._userToken);
+      this.showImageReceipt = false;
+      setTimeout(() => {
+        loadingEl.dismiss();
+        this.dasboard.loadReceipts();
+      }, 5000);
+    });
  }
 
 
