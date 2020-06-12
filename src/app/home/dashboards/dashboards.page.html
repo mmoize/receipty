@@ -5,7 +5,7 @@
       <ion-segment color="primary" (ionChange)="onFilterUpdate($event)">
         <ion-segment-button id="segment1" value="all">Receipts</ion-segment-button>
         <ion-segment-button value="bookable">Spending</ion-segment-button>
-        <ion-segment-button id="segment3" value="bookable">Metrics</ion-segment-button>
+        <ion-segment-button id="segment3" value="bookable">Total</ion-segment-button>
       </ion-segment>
     </ion-col>
   </ion-row>
@@ -72,7 +72,7 @@
  </ion-row> -->
  
  <div class="pins">
-   <div class="pin" *ngFor="let receipt of userReceipts" >
+   <div class="pin" size ="12" size-sm="8" offset-sm ="2"  *ngFor="let receipt of userReceipts" >
      <img [src]="receipt.receipt_image_set[0].image" (click)="openViewimageModal(receipt)"/>
    </div>
  </div>

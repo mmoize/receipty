@@ -38,7 +38,9 @@ export class ProfilePage implements OnInit {
 
   }
 
-  ionViewDidEnter() {
+
+
+  ionViewWillEnter() {
     this.authService.returnUserId().then(resData => {
       this.userId = resData;
       const tin = resData;
@@ -50,8 +52,6 @@ export class ProfilePage implements OnInit {
         console.log(this.imageString);
       });
     });
-
-
   }
 
 

@@ -1,5 +1,12 @@
 
 <ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-item lines="none">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm= "2"  >
@@ -14,9 +21,9 @@
             <div class="contact-card__footer">
               <div class="contact-card__footer__core">
               
-                <ion-card color="light" class="contact-card__footer__core__email">
+                <ion-card  class="contact-card__footer__core__email">
                   <ion-card-header>
-                    <ion-card-title>Bio:</ion-card-title>
+                    <ion-card-title>Bio</ion-card-title>
                   </ion-card-header>
                   <ion-card-content>
                     {{ userProfile?.bio }}
@@ -45,6 +52,34 @@
               </div>
             </div>
            </div>
+
+            <ion-row >
+              <ion-col class="ion-align-self-start">
+                <ion-card id="bottomCards">
+                  <div class="ion-text-center">
+                    <h2>Total</h2>
+                    <h1>$3500</h1>
+                  </div>
+                </ion-card>
+              </ion-col>
+              <ion-col class="ion-align-self-center">
+                <ion-card >
+                  <div class="ion-text-center">
+                    <h2>Receipts</h2>
+                    <h1>25</h1>
+                  </div>
+                </ion-card>
+              </ion-col>
+              <ion-col class="ion-align-self-end">
+                <ion-card id="bottomCards">
+                    <div class="ion-text-center">
+                      <h2>Metrics</h2>
+                      <ion-icon color="success" name="caret-up-outline"></ion-icon>
+                      <ion-icon color="danger" name="caret-down-outline"></ion-icon>
+                    </div>
+                </ion-card>
+              </ion-col>
+            </ion-row>
         </ion-card>
       </ion-col>
     </ion-row>

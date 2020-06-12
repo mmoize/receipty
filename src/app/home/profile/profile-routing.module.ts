@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage
-  }
+  },
+  // {
+  //   path: 'profile-setting',
+  //   loadChildren: () => import('./profile-settings/profile-settings.module').then( m => m.ProfileSettingsModule)
+  // }
 ];
 
 @NgModule({

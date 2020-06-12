@@ -53,7 +53,7 @@ export class ReceiptsServiceService implements OnInit {
       return this.http.get<any>(this.baseUrl, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Token ' +  userToken,
+          Authorization: 'Token ' + userToken,
         }
       }).pipe(map(resData => {
         console.log('this is response', resData);
@@ -154,7 +154,7 @@ export class ReceiptsServiceService implements OnInit {
 
     deleteReceipt(pk) {
      return this.http.delete(`${this.deleteBaseUrl}${pk}/`).subscribe(resData => {
-       this._userReceipts
+      /// this._userReceipts
      });
     }
 

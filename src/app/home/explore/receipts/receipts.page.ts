@@ -213,6 +213,9 @@ export class ReceiptsPage implements OnInit, OnDestroy {
 
 
  onProceed() {
+    this.authService.userToken.subscribe(token => {
+      this._userToken = token;
+    });
     this.loadingCtrl.create({keyboardClose: true, message: 'Uploading your receipt..'})
     .then(loadingEl => {
       loadingEl.present();
