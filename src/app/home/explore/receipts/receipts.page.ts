@@ -24,9 +24,10 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   selectedImage: string;
   usePicker = false;
   showImageReceipt = false;
-  
+
   postImage;
   form: FormGroup;
+  // tslint:disable-next-line: variable-name
   _userToken;
   constructor(private authService: AuthServiceService,
               private router: Router,
@@ -36,7 +37,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
               private receiptService: ReceiptsServiceService,
               private profileService: ProfileserviceService,
               private loadingCtrl: LoadingController,
-              private dasboard: DashboardsPage,
+              private dashboard: DashboardsPage,
               ) { }
 
 
@@ -150,8 +151,9 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     this.actionSheetCtrl.create({
       header: 'please Choose',
       buttons: [
-        {text: 'Take Picture', handler: () => {
+        {text: 'Take Picturee', handler: () => {
           this.captureImage();
+           //this.openCapturedReceiptModal();
         }},
         {text: 'Choose from device', handler: () => {
           this.filePickeRef.nativeElement.click();
@@ -164,7 +166,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   }
 
   private captureImage() {
-    if (! Capacitor.isPluginAvailable('Camera') || this.usePicker ) {
+    if (!Capacitor.isPluginAvailable('Camera')) {
      // this.filePickeRef.nativeElement.click();
       return;
     }
@@ -174,12 +176,18 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       correctOrientation: true,
       height: 320,
       width: 200,
-      resultType: CameraResultType.Base64
+      // resultType: CameraResultType.Base64
+      resultType: CameraResultType.DataUrl,
+      saveToGallery: true
     }).then(image => {
-        this.selectedImage = image.base64String;
+        this.selectedImage = image.dataUrl;
+        console.log('thisi is image', this.selectedImage);
         this.imagePick.emit(image.base64String);
     }).catch(error => { // this part collects errors.
       console.log(error);
+      if (this.usePicker) {
+        this.filePickeRef.nativeElement.click();
+      }
       return false;
     });
   }
@@ -187,11 +195,13 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   onFileChosen(event: Event) {
     const pickedFile = (event.target as HTMLInputElement).files[0];
     this.postImage = pickedFile;
-    console.log('this is image', this.postImage);
+
     if (!pickedFile) {
       return;
     }
+
     const fR = new FileReader();
+
     fR.onload = () => {
       const dataUrl = fR.result.toString();
       this.selectedImage = dataUrl;
@@ -207,7 +217,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
      componentProps: {selectedImage: this.selectedImage}
    }).then(modalEl => {
      modalEl.present();
-     return modalEl.onDidDismiss();
+     return;
    });
  }
 
@@ -220,12 +230,11 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     .then(loadingEl => {
       loadingEl.present();
       const image = this.postImage;
-      console.log('image', image);
       this.receiptService.uplaodUserReceipt(image, this.form.value.total_spending, this.form.value.category, this._userToken);
       this.showImageReceipt = false;
       setTimeout(() => {
         loadingEl.dismiss();
-        this.dasboard.loadReceipts();
+        this.dashboard.loadReceipts();
       }, 5000);
     });
  }

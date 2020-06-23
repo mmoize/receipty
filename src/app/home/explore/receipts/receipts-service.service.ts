@@ -48,7 +48,7 @@ export class ReceiptsServiceService implements OnInit {
   }
 
   loadUserReceipts() {
-    
+
    return this. authService.userToken.pipe(switchMap(userToken => {
       return this.http.get<any>(this.baseUrl, {
         headers: {
@@ -81,7 +81,7 @@ export class ReceiptsServiceService implements OnInit {
    }));
     // .subscribe(results => {
     //   this.userReceipts.push(results);
-    //   this. proccessedResults(results);
+    //   this. processedResults(results);
     // });
   }
 
@@ -95,7 +95,7 @@ export class ReceiptsServiceService implements OnInit {
       this.setReceiptData(key);
    }
   }
-    
+
 
 
  setReceiptData(receiptData) {
@@ -112,7 +112,7 @@ export class ReceiptsServiceService implements OnInit {
     );
     console.log('this is the setreceiptdata', receiptData);
     this.StoreUserReceiptData(userReceipt_Data);
-    
+
   }
 
   /// data  is undifined in this function
