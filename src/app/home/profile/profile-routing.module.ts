@@ -6,12 +6,16 @@ import { ProfilePage } from './profile.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
+    component: ProfilePage,
+
   },
-  // {
-  //   path: 'profile-setting',
-  //   loadChildren: () => import('./profile-settings/profile-settings.module').then( m => m.ProfileSettingsModule)
-  // }
+  
+  {
+    path: 'profilesettings',
+    loadChildren: () => import('./profile-settings/profile-settings.module').then( m => m.ProfileSettingsPageModule)
+   },
+
+
 ];
 
 @NgModule({

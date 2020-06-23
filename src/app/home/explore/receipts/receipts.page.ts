@@ -10,6 +10,7 @@ import { Component, OnInit, OnDestroy, Output, ViewChild, EventEmitter, ElementR
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { ActionSheetController, Platform, ModalController, LoadingController } from '@ionic/angular';
 import { Capacitor, Plugins, CameraSource, CameraResultType } from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-receipts',
@@ -21,7 +22,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   @ViewChild('filePicker', {static: false}) filePickeRef: ElementRef<HTMLInputElement>;
 
   @Output() imagePick = new EventEmitter<string>();
-  selectedImage: string;
+  selectedImage: SafeResourceUrl;
   usePicker = false;
   showImageReceipt = false;
 
@@ -38,6 +39,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
               private profileService: ProfileserviceService,
               private loadingCtrl: LoadingController,
               private dashboard: DashboardsPage,
+              private sanitizer: DomSanitizer
               ) { }
 
 
@@ -151,7 +153,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     this.actionSheetCtrl.create({
       header: 'please Choose',
       buttons: [
-        {text: 'Take Picturee', handler: () => {
+        {text: 'Take Picture', handler: () => {
           this.captureImage();
            //this.openCapturedReceiptModal();
         }},
@@ -174,15 +176,16 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       quality: 70,
       source: CameraSource.Prompt,
       correctOrientation: true,
+      saveToGallery: true,
       height: 320,
       width: 200,
       // resultType: CameraResultType.Base64
       resultType: CameraResultType.DataUrl,
-      saveToGallery: true
     }).then(image => {
-        this.selectedImage = image.dataUrl;
+        this.selectedImage =  this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
         console.log('thisi is image', this.selectedImage);
-        this.imagePick.emit(image.base64String);
+        this.imagePick.emit(image.dataUrl);
+        this.showImageReceipt = true;
     }).catch(error => { // this part collects errors.
       console.log(error);
       if (this.usePicker) {
