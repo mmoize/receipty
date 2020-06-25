@@ -1,29 +1,61 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      DateTime
-    </ion-title>
-  </ion-navbar>
+    <ion-toolbar>
+      <ion-title>Profile Setting</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content class="outer-content">
+<ion-content >
+<ion-grid>
+    <ion-row>
+        <ion-col >
+      <form [formGroup]="form">
+          <ion-card >
+           <ion-list>
+             <ion-item lines="none">
+               <ion-label position="stacked">Username</ion-label>
+               <ion-input type="text" formControlName="username" [placeholder]="userProfile?.username"></ion-input>
+             </ion-item>
+             <ion-item lines="none">
+               <ion-label position="stacked">First name</ion-label>
+               <ion-input type="text" formControlName="f_name" [placeholder]="userProfile?.f_name"></ion-input>
+             </ion-item>
+             <ion-item lines="none">
+               <ion-label position="stacked">Last name</ion-label>
+               <ion-input type="text" formControlName="l_name" [placeholder]="userProfile?.l_name"></ion-input>
+             </ion-item>
+             <ion-item lines="none">
+               <ion-label position="stacked">City</ion-label>
+               <ion-input type="text" formControlName="city" [placeholder]="userProfile?.city"></ion-input>
+             </ion-item>
+             <ion-item lines="none">
+               <ion-label position="stacked">Country</ion-label>
+               <ion-input type="text" formControlName="country" [placeholder]="userProfile?.country"></ion-input>
+             </ion-item>
+             <ion-item lines="none">
+               <ion-label position="stacked">Bio</ion-label>
+               <ion-input type="text" formControlName="bio" [placeholder]="userProfile?.bio"></ion-input>
+             </ion-item>
+             <ion-item lines="none">
+               <ion-label>Date of birth</ion-label>
+               <ion-datetime displayFormat="MMM DD YYYY"></ion-datetime>
+             </ion-item>
+           </ion-list>
+          </ion-card>
+      </form>
+         </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm= "2">
+          <ion-button (click)="onEdit()" expand="block" color="primary" color ="primary">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
 
-  <ion-list>
-    <ion-item>
-      <ion-input placeholder="Title"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input placeholder="Location"></ion-input>
-    </ion-item>
-  </ion-list>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>Start Date</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
-    </ion-item>
-
-
+  <!-- <ion-list>
     <ion-item>
       <ion-label>Start Time</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
@@ -33,25 +65,4 @@
       <ion-label>Ends</ion-label>
       <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.timeEnds"></ion-datetime>
     </ion-item>
-
-    <button ion-item>
-      <ion-label>Repeat</ion-label>
-      <ion-note item-end>Never</ion-note>
-    </button>
-
-    <button ion-item>
-      <ion-label>Travel Time</ion-label>
-      <ion-note item-end>None</ion-note>
-    </button>
-  </ion-list>
-
-  <ion-list>
-    <button ion-item>
-      <ion-label>Alert</ion-label>
-      <ion-note item-end>None</ion-note>
-    </button>
-  </ion-list>
-
-</ion-content>
-
-<style>
+  </ion-list> -->

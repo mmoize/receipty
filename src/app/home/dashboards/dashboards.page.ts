@@ -1,3 +1,4 @@
+import { switchMap, take } from 'rxjs/operators';
 import { AuthServiceService } from './../../authentication/auth-service.service';
 import { ReceiptsServiceService } from './../explore/receipts/receipts-service.service';
 import { Component, OnInit, Injectable } from '@angular/core';
@@ -6,6 +7,7 @@ import { SegmentChangeEventDetail } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
 import { ViewimageComponent } from 'src/app/shared/viewimage/viewimage.component';
 import { Subscription } from 'rxjs';
+import { ReceiptDataCal } from '../explore/receipts/receiptDataCal.model';
 
 @Component({
   selector: 'app-dashboards',
@@ -19,10 +21,11 @@ import { Subscription } from 'rxjs';
 export class DashboardsPage implements OnInit {
 
   public userReceipts = [];
+  userReceiptCal;
   userImage = [];
   colo;
   userToken;
-
+  private receiptsCal: Subscription;
   private receiptsSub: Subscription;
 
   constructor(private receiptService: ReceiptsServiceService,
@@ -31,22 +34,31 @@ export class DashboardsPage implements OnInit {
               ) { }
 
   ngOnInit() {
- 
+
 
   }
 
 
- 
+
   ionViewWillEnter() {
+    this.authService.userToken.subscribe(token => {
+      const tokens = token;
+      this.receiptService.userReceiptData(tokens).subscribe(resdata => {
+        this.userReceiptCal = resdata;
+        console.log('this itttt', this.userReceiptCal);
+      });
+    });
+
     this.receiptService.loadUserReceipts().subscribe(() => {
       // something here
     });
     this.receiptsSub = this.receiptService.Receipts.subscribe(resData => {
       this.userReceipts = resData;
-      console.log('this is RJX', this.userReceipts);
     });
-  
+
+
   }
+
 
   loadReceipts() {
 

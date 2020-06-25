@@ -1,3 +1,4 @@
+import { ProfileSettingsPage } from './profile-settings/profile-settings.page';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -23,12 +24,16 @@ export interface ProfileData {
 })
 export class ProfileserviceService {
 
+  condo = [];
   // tslint:disable-next-line: variable-name
   private _userProfileData = new BehaviorSubject<userProfileData>(null);
-
-  constructor(private http: HttpClient) { }
+  userresultData;
+  constructor(
+               private http: HttpClient,
+               ) { }
 
   baseUrl = 'https://fleeks.herokuapp.com/api/profiles/';
+  profileEditUrl = 'https://fleeks.herokuapp.com/api/user/';
 
    fetchProfile(id) {
     return this.http.get<ProfileData>(`${this.baseUrl}${id}`);
@@ -57,6 +62,7 @@ export class ProfileserviceService {
 
     );
     this._userProfileData.next(userProfile);
+    this.userresultData = userProfile;
     this.storeUserProfileData(
       profileData.user_id,
       profileData.username,
@@ -99,5 +105,19 @@ export class ProfileserviceService {
     this._userProfileData.next(null);
     Plugins.Storage.remove({key: 'userProfileData'});
   }
+
+
+  UserProfileinfo(token, userData) {
+
+    const data = userData;
+    const xhr = new XMLHttpRequest();
+    const url = this.profileEditUrl;
+    xhr.open('PATCH', url, true);
+    xhr.setRequestHeader( 'Authorization', 'Token ' + token );
+    xhr.withCredentials = true;
+    return xhr.send(data);
+
+  }
+
 
 }

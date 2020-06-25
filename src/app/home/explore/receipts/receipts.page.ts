@@ -9,8 +9,35 @@ import { AuthServiceService } from './../../../authentication/auth-service.servi
 import { Component, OnInit, OnDestroy, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { ActionSheetController, Platform, ModalController, LoadingController } from '@ionic/angular';
-import { Capacitor, Plugins, CameraSource, CameraResultType } from '@capacitor/core';
+import { Capacitor, Plugins, CameraSource, CameraResultType, FilesystemDirectory, Camera, } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+function base64toBlob(base64Data, contentType) {
+  contentType = contentType || '';
+  const sliceSize = 1024;
+  const byteCharacters = window.atob(base64Data);
+  const bytesLength = byteCharacters.length;
+  const slicesCount = Math.ceil(bytesLength / sliceSize);
+  const byteArrays = new Array(slicesCount);
+
+  for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+    const begin = sliceIndex * sliceSize;
+    const end = Math.min(begin + sliceSize, bytesLength);
+
+    const bytes = new Array(end - begin);
+    for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+      bytes[i] = byteCharacters[offset].charCodeAt(0);
+    }
+    byteArrays[sliceIndex] = new Uint8Array(bytes);
+  }
+  return new Blob(byteArrays, {type: contentType});
+}
+
+interface Photo {
+  filepath: string;
+  webviewPath: string;
+  base64?: string;
+}
 
 @Component({
   selector: 'app-receipts',
@@ -25,6 +52,8 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   selectedImage: SafeResourceUrl;
   usePicker = false;
   showImageReceipt = false;
+
+  public photos: Photo[];
 
   postImage;
   form: FormGroup;
@@ -177,15 +206,31 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       source: CameraSource.Prompt,
       correctOrientation: true,
       saveToGallery: true,
-      height: 320,
-      width: 200,
+      // height: 320,
+      // width: 200,
       // resultType: CameraResultType.Base64
-      resultType: CameraResultType.DataUrl,
+      resultType: CameraResultType.Base64,
     }).then(image => {
-        this.selectedImage =  this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
-        console.log('thisi is image', this.selectedImage);
-        this.imagePick.emit(image.dataUrl);
+        const imageData = image.base64String;
+        const blob = base64toBlob(imageData, 'image/jpg');
+        // this.selectedImage = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.base64String));
+        
+        // let imageFile;
+        // if (typeof imageData === 'string') {
+        //   try {
+        //     imageFile =  base64toBlob(
+        //       imageData.replace('data:image/jpeg;base64,',
+        //     ''), 'image/jpeg');
+        //   } catch (error) {
+        //     console.log(error);
+        //     return;
+        //   }
+        // } else {
+        //   imageFile = ImageData;
+        // }
+        this.selectedImage = blob;
         this.showImageReceipt = true;
+
     }).catch(error => { // this part collects errors.
       console.log(error);
       if (this.usePicker) {
@@ -197,7 +242,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
 
   onFileChosen(event: Event) {
     const pickedFile = (event.target as HTMLInputElement).files[0];
-    this.postImage = pickedFile;
+    this.selectedImage = pickedFile;
 
     if (!pickedFile) {
       return;
@@ -224,7 +269,6 @@ export class ReceiptsPage implements OnInit, OnDestroy {
    });
  }
 
-
  onProceed() {
     this.authService.userToken.subscribe(token => {
       this._userToken = token;
@@ -232,7 +276,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     this.loadingCtrl.create({keyboardClose: true, message: 'Uploading your receipt..'})
     .then(loadingEl => {
       loadingEl.present();
-      const image = this.postImage;
+      const image = this.selectedImage;
       this.receiptService.uplaodUserReceipt(image, this.form.value.total_spending, this.form.value.category, this._userToken);
       this.showImageReceipt = false;
       setTimeout(() => {
@@ -241,6 +285,27 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       }, 5000);
     });
  }
+
+ public async addNewToGallery() {
+  // Take a photo
+  const capturedPhoto = await Camera.getPhoto({
+    resultType: CameraResultType.Uri, 
+    source: CameraSource.Camera, 
+    quality: 90
+  });
+  
+  this.photos.unshift({
+    filepath: "soon...",
+    webviewPath: capturedPhoto.webPath
+  });
+  this.showImageReceipt = true;
+
+}
+
+
+
+
+
 
 
 

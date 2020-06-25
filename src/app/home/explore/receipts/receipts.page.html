@@ -30,7 +30,7 @@
                 </ion-item>
               </ion-slide>  
               <ion-slide>
-                <ion-item routerLink="/home/dashboards">
+                <ion-item>
                     <ion-card class="divcard">
                       <ion-card-title ><h1>Total</h1></ion-card-title>
                       <ion-card-content>
@@ -50,11 +50,13 @@
 <ion-row *ngIf="showImageReceipt">
   <ion-col  size-md = "6" offset-md ="3">
       <ion-card  class="imgcol">
-          <ion-img 
+
+        <ion-img 
           role="button"
           class="image" 
-          [src]="selectedImage" >
+         [src]="selectedImage" >
         </ion-img>
+
         <ion-card-content>
           <form [formGroup]="form"> 
           <ion-list>

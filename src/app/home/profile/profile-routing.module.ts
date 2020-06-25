@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ProfilePage,
 
   },
-  
+
   {
     path: 'profilesettings',
     loadChildren: () => import('./profile-settings/profile-settings.module').then( m => m.ProfileSettingsPageModule)

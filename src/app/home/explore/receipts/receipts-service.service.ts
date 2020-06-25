@@ -1,13 +1,15 @@
-
-
 import { AuthServiceService } from './../../../authentication/auth-service.service';
+
+
 import { tap, map, switchMap } from 'rxjs/operators';
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Receipt } from './receipts.model';
 import { Plugins } from '@capacitor/core';
-import { ReturnStatement } from '@angular/compiler';
+
+import { ReceiptDataCal } from './receiptDataCal.model';
+
 
 
 
@@ -24,15 +26,21 @@ export interface ReceiptData {
 })
 export class ReceiptsServiceService implements OnInit {
 
+
   // tslint:disable-next-line: variable-name
   private _userReceipts = new BehaviorSubject<Receipt[]>([]) ;
+  // tslint:disable-next-line: variable-name
+  private _userReciptCal = new BehaviorSubject<ReceiptDataCal[]>([]);
+  userReciptCals = [];
   userReceipts = [];
   handler;
   xhr;
 
+
   constructor(private http: HttpClient,
               private authService: AuthServiceService,
               ) { }
+
 
 
   baseUrl = 'https://fleeks.herokuapp.com/api/receiptview/';
@@ -42,6 +50,11 @@ export class ReceiptsServiceService implements OnInit {
 
   get Receipts() {
     return this._userReceipts.asObservable();
+  }
+
+  get receiptsDataCal() {
+    return this._userReciptCal.asObservable();
+
   }
 
 
@@ -159,6 +172,53 @@ export class ReceiptsServiceService implements OnInit {
      });
     }
 
+    onLoadUserReceiptCal() {
+     return this.authService.userToken.pipe(switchMap(userToken => {
+       return this.http.get<any>(this.calUrl, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Token ' + userToken,
+          }
+        }).pipe(map(resultData => {
+          console.log('this is calculations', resultData);
+          this._userReciptCal = resultData;
+          this.userReciptCals = resultData;
+          console.log('this is the list', this._userReciptCal);
+          const receiptDataCal = [];
+          for (const key in resultData) {
+            if (resultData.hasOwnProperty(key)) {
+              receiptDataCal.push(new ReceiptDataCal(
+                resultData[key].No_favourate_receipt,
+                resultData[key].Number_of_Receipt,
+                resultData[key].Total_spending
+              ));
+            }
+          }
+          return receiptDataCal;
+        }),
+          tap(receiptDataCals => {
+            // this._userReciptCal.next(receiptDataCals);
+          })
+        );
+      }));
+    }
+
+
+    userReceiptData(token) {
+      return this.http.get(this.calUrl,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Token ' + token,
+        }
+      }
+      ).pipe(tap());
+    }
+
+
+
+
 
 }
+
 
