@@ -176,6 +176,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   }
 
   onImagePicked(imageData: string) {
+    
   }
 
   onPickImage() {
@@ -206,14 +207,14 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       source: CameraSource.Prompt,
       correctOrientation: true,
       saveToGallery: true,
-      // height: 320,
-      // width: 200,
+      height: 320,
+      width: 200,
       // resultType: CameraResultType.Base64
-      resultType: CameraResultType.Base64,
+      resultType: CameraResultType.DataUrl,
     }).then(image => {
-        const imageData = image.base64String;
-        const blob = base64toBlob(imageData, 'image/jpg');
-        // this.selectedImage = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.base64String));
+        // const imageData = image.base64String;
+        // onst blob = base64toBlob(imageData, 'image/jpg');
+        this.selectedImage = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.base64String));
         
         // let imageFile;
         // if (typeof imageData === 'string') {
@@ -228,7 +229,6 @@ export class ReceiptsPage implements OnInit, OnDestroy {
         // } else {
         //   imageFile = ImageData;
         // }
-        this.selectedImage = blob;
         this.showImageReceipt = true;
 
     }).catch(error => { // this part collects errors.
