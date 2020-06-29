@@ -159,7 +159,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   }
 
   onImagePicked(imageData: string) {
-    
+
   }
 
   onPickImage() {
@@ -168,7 +168,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       buttons: [
         {text: 'Take Picture', handler: () => {
           this.captureImage();
-           //this.openCapturedReceiptModal();
+           // this.openCapturedReceiptModal();
         }},
         {text: 'Choose from device', handler: () => {
           this.filePickeRef.nativeElement.click();
@@ -195,6 +195,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       // resultType: CameraResultType.Base64
       resultType: CameraResultType.Base64,
     }).then(image => {
+        // tslint:disable-next-line: prefer-const
         let urlCreator = window.URL || window.webkitURL;
         const blobDatas = this.b64toBlob(image.base64String, `image/${image.format}`);
         this.postImageFormat = image.format;
@@ -268,24 +269,24 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
- 
+
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
       const slice = byteCharacters.slice(offset, offset + sliceSize);
- 
+
       const byteNumbers = new Array(slice.length);
       for (let i = 0; i < slice.length; i++) {
         byteNumbers[i] = slice.charCodeAt(i);
       }
- 
+
       const byteArray = new Uint8Array(byteNumbers);
       byteArrays.push(byteArray);
     }
- 
+
     const blob = new Blob(byteArrays, { type: contentType });
     return blob;
   }
 
-  getBlob (b64Data) {
+  getBlob(b64Data) {
     const contentType = '';
     const  sliceSize = 512;
 

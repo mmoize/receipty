@@ -23,7 +23,11 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-      }
+      },
+      {
+        path: 'totals-detail',
+        loadChildren: () => import('./dashboards/totals/totals-detail/totals-detail.module').then( m => m.TotalsDetailPageModule)
+      },
     ]
 
   }

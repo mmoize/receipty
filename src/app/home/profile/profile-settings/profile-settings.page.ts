@@ -112,7 +112,7 @@ export class ProfileSettingsPage implements OnInit {
       // datas['l_name'] = this.form.value.l_name;
     }
   if ( this.form.value.city == null ) {
-      datas.append('city', this.userProfile.city)
+      datas.append('city', this.userProfile.city);
       // tslint:disable-next-line: no-string-literal
       // datas['city'] = this.userProfile.city;
     } else {
@@ -137,7 +137,7 @@ export class ProfileSettingsPage implements OnInit {
     }
   if (this.form.value.image == null) {
     // datas.append('image', this.imageString );  // `myAvatar.${this.postImageFormat}`
-    
+
   } else {
     datas.append('image', this.form.value.image, `myAvatar.${this.postImageFormat}`);
   }
@@ -199,7 +199,7 @@ export class ProfileSettingsPage implements OnInit {
       resultType: CameraResultType.Base64,
       source
     });
-    let urlCreator = window.URL || window.webkitURL;
+    const urlCreator = window.URL || window.webkitURL;
     const blobData = this.getBlob(image.base64String);
     this.selectedImage = urlCreator.createObjectURL(blobData);
     const blobDatas = this.b64toBlob(image.base64String, `image/${image.format}`);
@@ -220,25 +220,25 @@ export class ProfileSettingsPage implements OnInit {
   b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
- 
+
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
       const slice = byteCharacters.slice(offset, offset + sliceSize);
- 
+
       const byteNumbers = new Array(slice.length);
       for (let i = 0; i < slice.length; i++) {
         byteNumbers[i] = slice.charCodeAt(i);
       }
- 
+
       const byteArray = new Uint8Array(byteNumbers);
       byteArrays.push(byteArray);
     }
- 
+
     const blob = new Blob(byteArrays, { type: contentType });
     return blob;
   }
 
 
-  getBlob (b64Data) {
+  getBlob(b64Data) {
     const contentType = '';
     const  sliceSize = 512;
 
