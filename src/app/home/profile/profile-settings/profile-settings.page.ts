@@ -4,7 +4,8 @@ import { AuthServiceService } from 'src/app/authentication/auth-service.service'
 import { ReceiptsServiceService } from '../../explore/receipts/receipts-service.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ActionSheetController } from '@ionic/angular';
+import { Plugins, CameraSource, Camera, CameraResultType } from '@capacitor/core';
 
 
 @Component({
@@ -15,9 +16,13 @@ import { LoadingController } from '@ionic/angular';
 
 
 export class ProfileSettingsPage implements OnInit {
-
+  selectedImage;
   userProfile;
   imageString;
+  postImage;
+  postImageFormat;
+  showImageAvatar = false;
+  newImage = false;
 
   form: FormGroup;
 
@@ -26,6 +31,7 @@ export class ProfileSettingsPage implements OnInit {
               private receiptService: ReceiptsServiceService,
               private router: Router,
               private loadingCtrl: LoadingController,
+              private actionSheetCtrl: ActionSheetController
                ) { }
 
   public event = {
@@ -62,6 +68,7 @@ export class ProfileSettingsPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
+      image: new FormControl(null)
     });
   }
 
@@ -125,10 +132,16 @@ export class ProfileSettingsPage implements OnInit {
       datas.append('bio', this.userProfile.bio);
       // datas['bio '] = this.userProfile.bio;
     } else {
-      datas.append('bio', this.form.value.bio)
+      datas.append('bio', this.form.value.bio);
       // datas['bio'] = this.form.value.bio;
     }
-
+  if (this.form.value.image == null) {
+    // datas.append('image', this.imageString );  // `myAvatar.${this.postImageFormat}`
+    
+  } else {
+    datas.append('image', this.form.value.image, `myAvatar.${this.postImageFormat}`);
+  }
+  console.log( 'thisii  ny mima', this.form.value.image);
   return datas;
   }
 
@@ -152,5 +165,103 @@ export class ProfileSettingsPage implements OnInit {
     });
 
   }
+
+
+  async selectImageSource() {
+    const buttons = [
+      {
+        text: 'Take Photo',
+        icon: 'camera',
+        handler: () => {
+          this.addImage(CameraSource.Camera);
+        }
+      },
+      {
+        text: 'Choose From Photos Photo',
+        icon: 'image',
+        handler: () => {
+          this.addImage(CameraSource.Photos);
+        }
+      }
+    ];
+
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Select Image Source',
+      buttons
+    });
+    await actionSheet.present();
+  }
+
+  async addImage(source: CameraSource) {
+    const image = await Camera.getPhoto({
+      quality: 60,
+      allowEditing: true,
+      resultType: CameraResultType.Base64,
+      source
+    });
+    let urlCreator = window.URL || window.webkitURL;
+    const blobData = this.getBlob(image.base64String);
+    this.selectedImage = urlCreator.createObjectURL(blobData);
+    const blobDatas = this.b64toBlob(image.base64String, `image/${image.format}`);
+    this.postImageFormat = image.format;
+    this.postImage = blobDatas;
+    this.showImageAvatar = true;
+
+  }
+
+  onProceed() {
+    this.showImageAvatar = false;
+    this.newImage = true;
+    this.form.patchValue({image: this.postImage});
+  }
+
+  // Helper function
+  // https://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+  b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+ 
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+ 
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+ 
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+ 
+    const blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  }
+
+
+  getBlob (b64Data) {
+    const contentType = '';
+    const  sliceSize = 512;
+
+    b64Data = b64Data.replace(/data\:image\/(jpeg|jpg|png)\;base64\,/gi, '');
+
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+  }
+
 
 }

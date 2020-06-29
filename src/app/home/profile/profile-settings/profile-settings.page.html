@@ -1,48 +1,94 @@
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar>
       <ion-title>Profile Setting</ion-title>
     </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content >
-<ion-grid>
+
+  <ion-row>
+    <ion-col>
+      <ion-item  lines="none">
+        <ion-buttons>
+          <ion-icon color="danger" name="arrow-back" routerLink="/home/dashboards/totals"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <form [formGroup]="form">
+<ion-grid  *ngIf="showImageAvatar">
+  <ion-row>
+    <ion-col>
+      <ion-card  class="imgcol">
+
+        <ion-img
+          role="button"
+          class="image" 
+        [src]="selectedImage" >
+        </ion-img>
+        <ion-button expand="block" color="success" (click)="onProceed()">
+          <h3>Proceed</h3>
+        </ion-button>
+        <ion-button expand="block" color="primary" (click)="selectImageSource()">
+          <h3>Retake</h3>
+        </ion-button>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid *ngIf="!showImageAvatar">
+  <ion-row>
+    <ion-col size="12" size-sm="8" offset-sm= "2">
+      <ion-list-header>
+        <ion-item lines="none">
+          <ion-avatar slot="start" >
+            <ion-img *ngIf="!newImage"  [src]="imageString"></ion-img>
+            <ion-img *ngIf="newImage"   [src]="selectedImage"></ion-img>
+          </ion-avatar>
+        </ion-item>
+        <ion-item lines="none" start="right">
+          <ion-button (click)="selectImageSource()">Add Avatar</ion-button>
+        </ion-item>
+      </ion-list-header>
+    </ion-col>
+  </ion-row>
     <ion-row>
-        <ion-col >
-      <form [formGroup]="form">
-          <ion-card >
-           <ion-list>
-             <ion-item lines="none">
-               <ion-label position="stacked">Username</ion-label>
-               <ion-input type="text" formControlName="username" [placeholder]="userProfile?.username"></ion-input>
-             </ion-item>
-             <ion-item lines="none">
-               <ion-label position="stacked">First name</ion-label>
-               <ion-input type="text" formControlName="f_name" [placeholder]="userProfile?.f_name"></ion-input>
-             </ion-item>
-             <ion-item lines="none">
-               <ion-label position="stacked">Last name</ion-label>
-               <ion-input type="text" formControlName="l_name" [placeholder]="userProfile?.l_name"></ion-input>
-             </ion-item>
-             <ion-item lines="none">
-               <ion-label position="stacked">City</ion-label>
-               <ion-input type="text" formControlName="city" [placeholder]="userProfile?.city"></ion-input>
-             </ion-item>
-             <ion-item lines="none">
-               <ion-label position="stacked">Country</ion-label>
-               <ion-input type="text" formControlName="country" [placeholder]="userProfile?.country"></ion-input>
-             </ion-item>
-             <ion-item lines="none">
-               <ion-label position="stacked">Bio</ion-label>
-               <ion-input type="text" formControlName="bio" [placeholder]="userProfile?.bio"></ion-input>
-             </ion-item>
-             <ion-item lines="none">
-               <ion-label>Date of birth</ion-label>
-               <ion-datetime displayFormat="MMM DD YYYY"></ion-datetime>
-             </ion-item>
-           </ion-list>
-          </ion-card>
-      </form>
-         </ion-col>
+      <ion-col size="12" size-sm="8" offset-sm= "2">
+
+            <ion-card >
+            <ion-list>
+              <ion-item lines="none">
+                <ion-label position="stacked">Username</ion-label>
+                <ion-input type="text" formControlName="username" [placeholder]="userProfile?.username"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label position="stacked">First name</ion-label>
+                <ion-input type="text" formControlName="f_name" [placeholder]="userProfile?.f_name"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label position="stacked">Last name</ion-label>
+                <ion-input type="text" formControlName="l_name" [placeholder]="userProfile?.l_name"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label position="stacked">City</ion-label>
+                <ion-input type="text" formControlName="city" [placeholder]="userProfile?.city"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label position="stacked">Country</ion-label>
+                <ion-input type="text" formControlName="country" [placeholder]="userProfile?.country"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label position="stacked">Bio</ion-label>
+                <ion-input type="text" formControlName="bio" [placeholder]="userProfile?.bio"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>Date of birth</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY"></ion-datetime>
+              </ion-item>
+            </ion-list>
+            </ion-card>
+        </ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid>
@@ -52,6 +98,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+</form>
 </ion-content>
 
 

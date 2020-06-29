@@ -147,12 +147,12 @@ export class ReceiptsServiceService implements OnInit {
   }
 
   // tslint:disable-next-line: variable-name
-  uplaodUserReceipt(image, total_spending, category, userTokens) {
+  uplaodUserReceipt(image, imageFormat, total_spending, category, userTokens) {
 
      // format the data before attaching it to the http-request
     const data = new FormData();
     console.log('this is the image', image);
-    data.append('image', image);
+    data.append('image', image, `myReceipt.${imageFormat}`);
     data.append('total_spending', total_spending);
     data.append('category', category);
 

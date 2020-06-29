@@ -1,4 +1,10 @@
+ion-grid {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin: 0px;
 
+}
 
 
 p {
@@ -20,23 +26,39 @@ p {
     font-size: 20px; //Preferred size here
   }
   
-  ion-grid {
-    height: 100vh;
+  // ion-grid {
+  //   height: 100vh;
   
-  }
-  
-  ion-segment-button {
-   background-color: #6370ff;
-  }
-  
+  // }
+
   ion-card {
-  
-    display: inline-block;
-    padding: 0px;
-    width: fit-content;
+    height: 100vh;
+
+    margin: 0px;
+    text-align: center;
+    // display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
-    margin-left: 20px;
-  }
+}
+
+ion-content {
+  padding: 0px;
+  margin: 0px;
+}
+  
+
+  
+  // ion-card {
+  
+  //   display: inline-block;
+  //   padding: 0px;
+  //   width: fit-content;
+  //   border-radius: 10px;
+  //   margin-left: 20px;
+  // }
   ion-label:nth-child(1) {
     font-family: monospace;
   }
@@ -115,3 +137,20 @@ p {
     column-count: 3;
   }
 
+#secondgrid {
+    // height: 100%;
+    width: 100%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#secondcard {
+     height: 15vh;
+    padding: none;
+    text-align: center;
+    display: inline-block;
+}

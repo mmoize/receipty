@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardsPage
+  },
+  {
+    path: 'totals',
+    loadChildren: () => import('./totals/totals.module').then( m => m.TotalsPageModule)
   }
 ];
 

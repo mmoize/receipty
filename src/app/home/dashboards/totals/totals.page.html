@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide>
+        <ion-item lines="none">
+          <ion-icon id="toolbarIcons" color="danger" name="analytics-outline"></ion-icon>
+        </ion-item>
+      </ion-slide>
+      <ion-slide>
+        <ion-item routerLink="/home/dashboards" lines="none">     
+          <ion-icon id="toolbarIcons" color="danger"  name="albums-outline"></ion-icon>
+        </ion-item>
+      </ion-slide>
+      <ion-slide>
+        <ion-item lines="none">
+          <ion-icon id="toolbarIcons" color="danger" name="bookmark-outline"></ion-icon>
+        </ion-item>
+      </ion-slide>
+    </ion-slides>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  >
+  <ion-grid>
+    <ion-row>
+      <ion-col  size="12" size-sm="8" offset-sm= "2">
+        <ion-card color="danger">
+          <ion-card-title>Totals</ion-card-title>
+          <h1>{{ userReceiptCal?.Total_spending |currency }}</h1>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col  size="12" size-sm="8" offset-sm= "2">
+        <ion-card color="danger">
+          <ion-card-title>Receipts</ion-card-title>
+          <h1>{{ userReceiptCal?.Number_of_Receipt }}</h1>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col  size="12" size-sm="8" offset-sm= "2">
+        <ion-card color="danger">
+          <ion-card-title>Saved</ion-card-title>
+          <h1>{{ userReceiptCal?.No_favourate_receipt }}</h1>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- <ion-content >
+  <ion-grid>
+    <ion-row>
+      <ion-col  size="12" size-sm="8" offset-sm= "2">
+        <ion-card color="danger">
+          <h1>Total</h1>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col  size="12" size-sm="8" offset-sm= "2">
+        <ion-card color="danger">
+          <h1>Total</h1>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col  size="12" size-sm="8" offset-sm= "2">
+        <ion-card color="danger">
+          <h1>Total</h1>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content> -->

@@ -1,14 +1,15 @@
 
 <ion-content padding=none>
   <ion-row>
-    <ion-col  >
-      <ion-segment color="primary" (ionChange)="onFilterUpdate($event)">
-        <ion-segment-button id="segment1" value="all">Receipts</ion-segment-button>
-        <ion-segment-button value="bookable">Spending</ion-segment-button>
-        <ion-segment-button id="segment3" value="bookable">Total</ion-segment-button>
-      </ion-segment>
+    <ion-col>
+      <ion-item  lines="none">
+        <ion-buttons>
+          <ion-icon color="danger" name="arrow-back" routerLink="/home/dashboards/totals"></ion-icon>
+        </ion-buttons>
+      </ion-item>
     </ion-col>
   </ion-row>
+
   <!-- <ion-grid text-centre>
     <ion-row>
       <ion-col    size-sm="6" offset-sm="3">

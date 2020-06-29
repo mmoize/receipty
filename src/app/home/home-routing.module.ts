@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: () => import('./dashboards/dashboards.module').then( m => m.DashboardsPageModule)
       },
       {
+        path: 'totals',
+        loadChildren: () => import('./dashboards/totals/totals.module').then( m => m.TotalsPageModule)
+      },
+      {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
       }

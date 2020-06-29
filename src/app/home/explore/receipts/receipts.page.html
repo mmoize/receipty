@@ -14,27 +14,27 @@
                   <ion-card class="divcard" text-center>
                     <ion-card-title ><h1>Receipt</h1></ion-card-title>
                     <ion-card-content>
-                      <ion-icon color="primary" name="camera-outline"></ion-icon>
+                      <ion-icon color="danger" name="camera-outline"></ion-icon>
                     </ion-card-content>
                  </ion-card>
                 </ion-item>
               </ion-slide>
               <ion-slide>
-                <ion-item routerLink="/home/dashboards">
+                <ion-item lines="none" routerLink="/home/dashboards">
                     <ion-card class="divcard">
                       <ion-card-title ><h1>Dashboard</h1></ion-card-title>
                       <ion-card-content>
-                        <ion-icon color="tertiary" name="cash-outline"></ion-icon>
+                        <ion-icon  color="danger" name="cash-outline"></ion-icon>
                       </ion-card-content>
                   </ion-card>
                 </ion-item>
               </ion-slide>  
               <ion-slide>
-                <ion-item>
-                    <ion-card class="divcard">
+                <ion-item lines="none"  routerLink="/home/dashboards/totals">
+                    <ion-card  class="divcard">
                       <ion-card-title ><h1>Total</h1></ion-card-title>
                       <ion-card-content>
-                        <ion-icon color="secondary" name="barcode-outline"></ion-icon>
+                        <ion-icon  color="danger" name="barcode-outline"></ion-icon>
                       </ion-card-content>
                    </ion-card>
                 </ion-item>
@@ -51,10 +51,10 @@
   <ion-col  size-md = "6" offset-md ="3">
       <ion-card  class="imgcol">
 
-        <ion-img 
+        <ion-img
           role="button"
           class="image" 
-         [src]="selectedImage" >
+        [src]="selectedImage" >
         </ion-img>
 
         <ion-card-content>
