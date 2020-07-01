@@ -1,3 +1,4 @@
+import { ReceiptsServiceService } from './../home/explore/receipts/receipts-service.service';
 import { take } from 'rxjs/operators';
 
 import { Component, OnInit } from '@angular/core';
@@ -27,9 +28,11 @@ export class AuthenticationPage implements OnInit {
               private router: Router,
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController,
+              private receiptService: ReceiptsServiceService
              ) { }
 
   ngOnInit() {
+
     this.form = new FormGroup({
       email: new FormControl(null, {
         updateOn: 'blur',
@@ -150,5 +153,6 @@ export class AuthenticationPage implements OnInit {
   //     });
   //   });
   // }
+
 
 }

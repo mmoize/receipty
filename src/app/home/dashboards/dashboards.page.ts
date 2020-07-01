@@ -8,6 +8,7 @@ import { ModalController } from '@ionic/angular';
 import { ViewimageComponent } from 'src/app/shared/viewimage/viewimage.component';
 import { Subscription } from 'rxjs';
 import { ReceiptDataCal } from '../explore/receipts/receiptDataCal.model';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-dashboards',
@@ -34,9 +35,11 @@ export class DashboardsPage implements OnInit {
               ) { }
 
   ngOnInit() {
-
+    
 
   }
+
+
 
 
 
@@ -49,15 +52,29 @@ export class DashboardsPage implements OnInit {
       });
     });
 
-    this.receiptService.loadUserReceipts().subscribe(() => {
-      // something here
-    });
+    // this.receiptService.loadUserReceipts().subscribe(() => {
+    //   // something here
+    // });
     this.receiptsSub = this.receiptService.Receipts.subscribe(resData => {
       this.userReceipts = resData;
     });
-
-
   }
+   
+
+  receiptGrap(){
+    const receiptsData = [];
+    for (const key in this.userReceipts) {
+      if (this.userReceipts.hasOwnProperty(key)) {
+        receiptsData.push(
+          this.userReceipts[key].total_spending,
+        );
+      }
+    }
+    console.log('ano ano', receiptsData);
+  }
+
+
+
 
 
   loadReceipts() {
@@ -95,6 +112,15 @@ export class DashboardsPage implements OnInit {
       modalEl.present();
       return modalEl.onDidDismiss();
     });
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
 

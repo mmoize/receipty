@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-receipt-details',
@@ -7,25 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReceiptDetailsPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) {
+
+  }
+
+
+
+
+  customAlertOptions: any = {
+    header: 'Pizza Toppings',
+    subHeader: 'Select your toppings',
+    message: '$1.00 per topping',
+    translucent: true
+  };
+
+  customPopoverOptions: any = {
+    header: 'Hair Color',
+    subHeader: 'Select your hair color',
+    message: 'Only select your dominant hair color'
+  };
+
+  customActionSheetOptions: any = {
+    header: 'Categories',
+    subHeader: 'Select your category'
+  };
 
   ngOnInit() {
   }
-
-  // async addImage(source: CameraSource) {
-  //   const image = await Camera.getPhoto({
-  //     quality: 60,
-  //     allowEditing: true,
-  //     resultType: CameraResultType.Base64,
-  //     source
-  //   });
- 
-  //   const blobData = this.b64toBlob(image.base64String, `image/${image.format}`);
-  //   const imageName = 'Give me a name';
- 
-  //   this.api.uploadImage(blobData, imageName, image.format).subscribe((newImage: ApiImage) => {
-  //     this.images.push(newImage);
-  //   });
-  // }
 
 }

@@ -1,76 +1,19 @@
 
 <ion-content padding=none>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-row>
     <ion-col>
       <ion-item  lines="none">
         <ion-buttons>
-          <ion-icon color="danger" name="arrow-back" routerLink="/home/dashboards/totals"></ion-icon>
+          <ion-icon color="danger" name="arrow-back" routerLink="/home/totals"></ion-icon>
         </ion-buttons>
       </ion-item>
     </ion-col>
   </ion-row>
-
-  <!-- <ion-grid text-centre>
-    <ion-row>
-      <ion-col    size-sm="6" offset-sm="3">
-        <ion-item lines="none"  class="ion-no-padding" *ngFor="let receipt of userReceipts[0]" >
-           <ion-card color="primary"  class="ion-no-padding">
-             <ion-card-header>
-               <ion-card-subtitle>{{ receipt.user.username }}</ion-card-subtitle>
-             </ion-card-header>
-            <ion-img [src]="receipt.image"></ion-img>
-            <ion-card-content>
-              <ion-list>
-                <ion-item lines="none">
-                  <ion-label>
-                    Total Spending
-                  </ion-label>
-                  <ion-label text-right>
-                    $400
-                  </ion-label>
-                </ion-item>
-              </ion-list>
-              <ion-list>
-                <ion-item lines="none">
-                  <ion-label>
-                    Category
-                  </ion-label>
-                  <ion-label text-right>
-                    Transportation
-                  </ion-label>
-                </ion-item>
-              </ion-list>
-              <ion-card-subtitle>
-                <ion-row>
-                  <ion-col class="ion-align-self-start">
-                    <button id="icons1" ion-button icon-start clear large>
-                      <ion-icon color="success" name="save"></ion-icon>
-                    </button>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center">
-                    <button id="icons1" ion-button icon-start clear large>
-                      <ion-icon color="success" name="download-outline"></ion-icon>
-                    </button>
-                  </ion-col>
-                  <ion-col class="ion-align-self-end">
-                    <button id="icons1" ion-button icon-start clear large>
-                      <ion-icon color="success" name="folder-outline"></ion-icon>
-                    </button>
-                  </ion-col>
-                </ion-row>
-              </ion-card-subtitle>
-            </ion-card-content>
-          </ion-card>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-row>
-    <ion-col col-4 *ngFor="let receipt of userReceipts[0]"  >
-          <img [src]="receipt.image" />
-    </ion-col>
- </ion-row> -->
  
  <div class="pins">
    <div class="pin" size ="12" size-sm="8" offset-sm ="2"  *ngFor="let receipt of userReceipts" >
@@ -80,54 +23,3 @@
 
 </ion-content>
 
-<!--                     <ion-virtual-scroll [items] ="userReceipts[0]" approxItemHeight="250px">
-        <ion-item lines="none"  class="ion-no-padding" *virtualItem="let receipt " >
-           <ion-card color="primary"  class="ion-no-padding">
-             <ion-card-header>
-               <ion-card-subtitle>{{ receipt.user.username }}</ion-card-subtitle>
-             </ion-card-header>
-            <ion-img [src]="receipt.image"></ion-img>
-            <ion-card-content>
-              <ion-list>
-                <ion-item lines="none">
-                  <ion-label>
-                    Total Spending
-                  </ion-label>
-                  <ion-label text-right>
-                    $400
-                  </ion-label>
-                </ion-item>
-              </ion-list>
-              <ion-list>
-                <ion-item lines="none">
-                  <ion-label>
-                    Category
-                  </ion-label>
-                  <ion-label text-right>
-                    Transportation
-                  </ion-label>
-                </ion-item>
-              </ion-list>
-              <ion-card-subtitle>
-                <ion-row>
-                  <ion-col class="ion-align-self-start">
-                    <button id="icons1" ion-button icon-start clear large>
-                      <ion-icon color="success" name="save"></ion-icon>
-                    </button>
-                  </ion-col>
-                  <ion-col class="ion-align-self-center">
-                    <button id="icons1" ion-button icon-start clear large>
-                      <ion-icon color="success" name="download-outline"></ion-icon>
-                    </button>
-                  </ion-col>
-                  <ion-col class="ion-align-self-end">
-                    <button id="icons1" ion-button icon-start clear large>
-                      <ion-icon color="success" name="folder-outline"></ion-icon>
-                    </button>
-                  </ion-col>
-                </ion-row>
-              </ion-card-subtitle>
-            </ion-card-content>
-          </ion-card>
-        </ion-item>
-       </ion-virtual-scroll>  -->

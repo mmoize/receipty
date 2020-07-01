@@ -60,10 +60,12 @@ export class ViewimageComponent implements OnInit {
      loadingEl.present();
      this.receiptService.deleteReceipt(pk);
      this.modalCtrl.dismiss();
+     
      setTimeout(() => {
-       this.receiptService.loadUserReceipts().subscribe(() => {});
-    }, 2000);
-     loadingEl.dismiss();
+      this.receiptService.loadUserReceipts().subscribe(() => {});
+      loadingEl.dismiss();
+    }, 4000);
+     
    });
 
 

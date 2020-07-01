@@ -45,7 +45,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   usePicker = false;
   showImageReceipt = false;
   postImageFormat;
-
+  userReceipts;
   public photos: Photo[];
 
   postImage;
@@ -53,9 +53,16 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
   _userToken;
 
-
+  receiptsData = [];
+  receiptsSub: Subscription;
   private authSub: Subscription;
   private previousAuthState = false;
+
+
+  customActionSheetOptions: any = {
+    header: 'Categories',
+    subHeader: 'Select your category'
+  };
 
 
     slideOpts = {
@@ -185,13 +192,13 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       return;
     }
     Plugins.Camera.getPhoto({
-      quality: 70,
+      quality: 100,
       source: CameraSource.Prompt,
       correctOrientation: true,
       saveToGallery: true,
       // allowEditing: true,
-      height: 500,
-      width: 400,
+      // height: 500,
+      width: 700,
       // resultType: CameraResultType.Base64
       resultType: CameraResultType.Base64,
     }).then(image => {
@@ -261,6 +268,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
         this.dashboard.loadReceipts();
       }, 5000);
     });
+
  }
 
 
@@ -311,11 +319,162 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     return blob;
   }
 
+  ionViewWillEnter() {
+    setTimeout(() => {
+      this.receiptService.loadUserRecentReceipts().subscribe(() => {});
+      this.addSvg();
+    }, 3000);
+
+    this.authService.userToken.subscribe(token => {
+      const tokens = token;
+    });
+
+    this.receiptService.loadUserRecentReceipts().subscribe(() => {
+      // something here
+    });
+    this.receiptsSub = this.receiptService.recentReceipts.subscribe(resData => {
+      this.userReceipts = resData;
+      console.log('Moooosa', this.userReceipts);
+    });
+  }
 
 
+  addSvg() {
 
+    for (const key in this.userReceipts) {
+        // receiptsData.push(this.userReceipts[key].category)
+        // receiptsData.push(this.userReceipts[key].total_spending)
+        // receiptsData.push(this.userReceipts[key].created_at)
+      if (this.userReceipts.hasOwnProperty(key)) {
+          const receipty = [];
 
+        if (this.userReceipts[key].category === 'Health') {
+            receipty.push('assets/icon/Health.svg');
+            receipty.push(
+            this.userReceipts[key].category,
+            this.userReceipts[key].total_spending,
+            this.userReceipts[key].created_at,
+          );
+        } else {
+          //
+        // tslint:disable-next-line: align
+        } if (this.userReceipts[key].category === 'Education') {
+            receipty.push('assets/icon/Education.svg');
+            receipty.push(
+            this.userReceipts[key].category,
+            this.userReceipts[key].total_spending,
+            this.userReceipts[key].created_at,
+          );
+        } else {
+          //
+        }
+          if (this.userReceipts[key].category === 'Groceries') {
+          receipty.push('assets/icon/grocery-cart.svg');
+          receipty.push(
+          this.userReceipts[key].category,
+          this.userReceipts[key].total_spending,
+          this.userReceipts[key].created_at,
+        );
+      } else {
+        //
+      }
+          if (this.userReceipts[key].category === 'Home') {
+        receipty.push('assets/icon/home.svg');
+        receipty.push(
+        this.userReceipts[key].category,
+        this.userReceipts[key].total_spending,
+        this.userReceipts[key].created_at,
+      );
+    } else {
+      //
+    }
+          if (this.userReceipts[key].category === 'shopping') {
+      receipty.push('assets/icon/shopping.svg');
+      receipty.push(
+      this.userReceipts[key].category,
+      this.userReceipts[key].total_spending,
+      this.userReceipts[key].created_at,
+    );
+  } else {
+    //
+  }
+          if (this.userReceipts[key].category === 'Transport') {
+      receipty.push('assets/icon/transport.svg');
+      receipty.push(
+      this.userReceipts[key].category,
+      this.userReceipts[key].total_spending,
+      this.userReceipts[key].created_at,
+      );
+  } else {
+    //
+  }
+          if (this.userReceipts[key].category === 'Utilities') {
+        receipty.push('assets/icon/tool-belt.svg');
+        receipty.push(
+        this.userReceipts[key].category,
+        this.userReceipts[key].total_spending,
+        this.userReceipts[key].created_at,
+      );
+  } else {
+    //
+  }
+          if (this.userReceipts[key].category === 'Food') {
+        receipty.push('assets/icon/Food.svg');
+        receipty.push(
+        this.userReceipts[key].category,
+        this.userReceipts[key].total_spending,
+        this.userReceipts[key].created_at,
+    );
+  } else {
+    //
+  }
+          if (this.userReceipts[key].category === 'Travel') {
+      receipty.push('assets/icon/Travel.svg');
+      receipty.push(
+      this.userReceipts[key].category,
+      this.userReceipts[key].total_spending,
+      this.userReceipts[key].created_at,
+  );
+  } else {
+    //
+  }
+          if (this.userReceipts[key].category === 'Entertainmentl') {
+        receipty.push('assets/icon/Entertainment.svg');
+        receipty.push(
+        this.userReceipts[key].category,
+        this.userReceipts[key].total_spending,
+        this.userReceipts[key].created_at,
+    );
+  } else {
+    //
+  }
+          if (this.userReceipts[key].category === 'Entertainment') {
+        receipty.push('assets/icon/Entertainment.svg');
+        receipty.push(
+        this.userReceipts[key].category,
+        this.userReceipts[key].total_spending,
+        this.userReceipts[key].created_at,
+    );
+  } else {
+  //
+  }
+          if (this.userReceipts[key].category === 'Other') {
+        receipty.push('assets/icon/other.svg');
+        receipty.push(
+        this.userReceipts[key].category,
+        this.userReceipts[key].total_spending,
+        this.userReceipts[key].created_at,
+   );
+  } else {
+  //
+  }
+          this.receiptsData.push(receipty);
 
+      }
+   }
+
+    console.log('this nooons', this.receiptsData);
+  }
 
 
 

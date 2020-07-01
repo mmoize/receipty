@@ -1,7 +1,8 @@
+
 import { AuthServiceService } from './../../../authentication/auth-service.service';
 
 
-import { tap, map, switchMap } from 'rxjs/operators';
+import { tap, map, switchMap, take } from 'rxjs/operators';
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -9,6 +10,8 @@ import { Receipt } from './receipts.model';
 import { Plugins } from '@capacitor/core';
 
 import { ReceiptDataCal } from './receiptDataCal.model';
+import { stringify } from 'querystring';
+import { JsonPipe } from '@angular/common';
 
 
 
@@ -30,12 +33,16 @@ export class ReceiptsServiceService implements OnInit {
   // tslint:disable-next-line: variable-name
   private _userReceipts = new BehaviorSubject<Receipt[]>([]) ;
   // tslint:disable-next-line: variable-name
+  private _userRecentReceipts = new BehaviorSubject<Receipt[]>([]) ;
+  // tslint:disable-next-line: variable-name
   private _userReciptCal = new BehaviorSubject<ReceiptDataCal[]>([]);
   userReciptCals = [];
   userReceipts = [];
   handler;
   xhr;
 
+  onloadReceipts;
+  onloadRecentUserReceipts;
 
   constructor(private http: HttpClient,
               private authService: AuthServiceService,
@@ -47,9 +54,14 @@ export class ReceiptsServiceService implements OnInit {
   postBaseurl = 'https://fleeks.herokuapp.com/api/receipts/';
   deleteBaseUrl = 'https://fleeks.herokuapp.com/api/delete_receipt/';
   calUrl = 'https://fleeks.herokuapp.com/api/cal/';
+  recentReceiptURL = 'https://fleeks.herokuapp.com/api/get_recent_receipts/';
 
   get Receipts() {
     return this._userReceipts.asObservable();
+  }
+
+  get recentReceipts() {
+    return this._userRecentReceipts.asObservable();
   }
 
   get receiptsDataCal() {
@@ -83,13 +95,19 @@ export class ReceiptsServiceService implements OnInit {
                   resData[key].tags,
                   resData[key].receipt_image_set,
                   new Date(resData[key].created_at)
-              ));
+                )
+              );
             }
           }
+        this.onloadReceipts = receiptsData;
         return receiptsData;
       }),
         tap(receiptData => {
+          // this.Receipts.pipe(take(1)).subscribe(receipts => {
+          //   this._userReceipts.next(receipts.concat());
+          // });
           this._userReceipts.next(receiptData);
+          this.setReceiptData(receiptData);
         })
       );
    }));
@@ -97,6 +115,21 @@ export class ReceiptsServiceService implements OnInit {
     //   this.userReceipts.push(results);
     //   this. processedResults(results);
     // });
+  }
+
+  private storeUserReceipts(
+    // pk: string,
+    // user: [],
+    // total_spending: string,
+    // category: string,
+    // tags: [],
+    // receipt_image_set: [],
+    // created_at: Date
+    receiptData
+
+  ) {
+    const data = JSON.stringify({receiptData});
+    Plugins.Storage.set({key: 'userReceiptData', value: data});
   }
 
   proccessedResults(receiptData) {
@@ -112,29 +145,44 @@ export class ReceiptsServiceService implements OnInit {
 
 
 
- setReceiptData(receiptData) {
+ setReceiptData(resData) {
+      const receiptsData = [];
+      for (const key in resData) {
+        if (resData.hasOwnProperty(key)) {
+          receiptsData.push(new Receipt
+            (
+              resData[key].pk,
+              resData[key].user,
+              resData[key].total_spending,
+              resData[key].category,
+              resData[key].tags,
+              resData[key].receipt_image_set,
+              new Date(resData[key].created_at)
+            )
+          );
+          const data = JSON.stringify(receiptsData);
+          Plugins.Storage.set({key: 'userReceiptData', value: data});
+        }
+      }
+      console.log('this is another', receiptsData);
+    // return receiptsData;
+    
 
     // tslint:disable-next-line: variable-name
-    const userReceipt_Data = new Receipt(
-      receiptData.pk,
-      receiptData.user,
-      receiptData.total_spending,
-      receiptData.category,
-      receiptData.tags,
-      receiptData.receipt_image_set,
-      receiptData.created_at
-    );
-    console.log('this is the setreceiptdata', receiptData);
-    this.StoreUserReceiptData(userReceipt_Data);
-
+    // const userReceipt_Data = new Receipt(
+    //   receiptData.pk,
+    //   receiptData.user,
+    //   receiptData.total_spending,
+    //   receiptData.category,
+    //   receiptData.tags,
+    //   receiptData.receipt_image_set,
+    //   receiptData.created_at
+    // );
+    // console.log('this is the setreceiptdata', receiptData);
+    // const data = JSON.stringify(userReceipt_Data);
+    // Plugins.Storage.set({key: 'userReceiptData', value: data});
   }
 
-  /// data  is undifined in this function
-  private StoreUserReceiptData(receData) {
-    const data = JSON.stringify(receData);
-    Plugins.Storage.set({key: 'userReceiptData', value: data});
-
-  }
 
   clearReceiptData() {
     this._userReceipts.next(null);
@@ -148,21 +196,23 @@ export class ReceiptsServiceService implements OnInit {
 
   // tslint:disable-next-line: variable-name
   uplaodUserReceipt(image, imageFormat, total_spending, category, userTokens) {
-
      // format the data before attaching it to the http-request
-    const data = new FormData();
-    console.log('this is the image', image);
-    data.append('image', image, `myReceipt.${imageFormat}`);
-    data.append('total_spending', total_spending);
-    data.append('category', category);
+      return this.uploadReceipt(image, imageFormat, total_spending, category, userTokens);
+    }
 
-    const xhr = new XMLHttpRequest();
-    const url = this.postBaseurl;
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader( 'Authorization', 'Token ' + userTokens );
-    xhr.withCredentials = true;
-    return xhr.send(data);
-
+    private uploadReceipt(image, imageFormat, total_spending, category, userTokens) {
+      const data = new FormData();
+      console.log('this is the image', image);
+      data.append('image', image, `myReceipt.${imageFormat}`);
+      data.append('total_spending', total_spending);
+      data.append('category', category);
+  
+      const xhr = new XMLHttpRequest();
+      const url = this.postBaseurl;
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader( 'Authorization', 'Token ' + userTokens );
+      xhr.withCredentials = true;
+      return xhr.send(data);
     }
 
 
@@ -214,6 +264,49 @@ export class ReceiptsServiceService implements OnInit {
       }
       ).pipe(tap());
     }
+
+    loadUserRecentReceipts() {
+
+      return this. authService.userToken.pipe(switchMap(userToken => {
+         return this.http.get<any>(this.recentReceiptURL, {
+           headers: {
+             'Content-Type': 'application/json',
+             Authorization: 'Token ' + userToken,
+           }
+         }).pipe(map(resData => {
+           console.log('this is response', resData);
+           const receiptsData = [];
+           for (const key in resData) {
+               if (resData.hasOwnProperty(key)) {
+                 receiptsData.push(new Receipt
+                   (
+                     resData[key].pk,
+                     resData[key].user,
+                     resData[key].total_spending,
+                     resData[key].category,
+                     resData[key].tags,
+                     resData[key].receipt_image_set,
+                     new Date(resData[key].created_at)
+                   )
+                 );
+               }
+             }
+           this.onloadRecentUserReceipts = receiptsData;
+           return receiptsData;
+         }),
+           tap(receiptData => {
+             // this.Receipts.pipe(take(1)).subscribe(receipts => {
+             //   this._userReceipts.next(receipts.concat());
+             // });
+             this._userRecentReceipts.next(receiptData);
+           })
+         );
+      }));
+       // .subscribe(results => {
+       //   this.userReceipts.push(results);
+       //   this. processedResults(results);
+       // });
+     }
 
 
 

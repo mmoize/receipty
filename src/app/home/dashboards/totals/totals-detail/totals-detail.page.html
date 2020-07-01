@@ -1,12 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Charts
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
+
+<ion-row>
+  <ion-col>
+    <ion-item  lines="none">
+      <ion-buttons>
+        <ion-icon color="danger" name="arrow-back" routerLink="/home/totals"></ion-icon>
+      </ion-buttons>
+    </ion-item>
+  </ion-col>
+</ion-row>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="ion-padding">
     <ion-card > 
       <ion-card-header>

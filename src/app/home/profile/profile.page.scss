@@ -164,7 +164,7 @@
         height: 150PX;
         padding: 10px;
         margin: 10px;
-        color: red;
+        color: yellowgreen;
       }
 
 
@@ -177,27 +177,29 @@
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
       }
-
- 
-
-
-
-      
-
-
-
- 
-      
-
-
-
-
-
-
-     
-
-      
   
+  }
+
+  #ion-grids {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+    padding: 20px;
+
+  }
+
+  #secondcard {
+
+    margin-top: 10px;
+    text-align: center;
+    // display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    min-height: 90px;
   }
 
 
