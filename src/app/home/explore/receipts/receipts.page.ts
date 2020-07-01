@@ -319,6 +319,10 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     return blob;
   }
 
+  ionViewWillLeave() {
+   this.userReceipts = '';
+  }
+
   ionViewWillEnter() {
     setTimeout(() => {
       this.receiptService.loadUserRecentReceipts().subscribe(() => {});
@@ -338,7 +342,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     });
   }
 
-
+  // adding SVG icons on the recent posts
   addSvg() {
 
     for (const key in this.userReceipts) {
@@ -438,16 +442,6 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   } else {
     //
   }
-          if (this.userReceipts[key].category === 'Entertainmentl') {
-        receipty.push('assets/icon/Entertainment.svg');
-        receipty.push(
-        this.userReceipts[key].category,
-        this.userReceipts[key].total_spending,
-        this.userReceipts[key].created_at,
-    );
-  } else {
-    //
-  }
           if (this.userReceipts[key].category === 'Entertainment') {
         receipty.push('assets/icon/Entertainment.svg');
         receipty.push(
@@ -456,7 +450,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
         this.userReceipts[key].created_at,
     );
   } else {
-  //
+    //
   }
           if (this.userReceipts[key].category === 'Other') {
         receipty.push('assets/icon/other.svg');

@@ -1,3 +1,4 @@
+import { SegmentChangeEventDetail } from '@ionic/core';
 import { Component, OnInit } from '@angular/core';
 import { ReceiptsServiceService } from '../../explore/receipts/receipts-service.service';
 import { AuthServiceService } from 'src/app/authentication/auth-service.service';
@@ -12,6 +13,9 @@ export class TotalsPage implements OnInit {
                private authService: AuthServiceService,
               ) { }
   userReceiptCal;
+  dashboardSegment = true;
+  receiptViewSegment = false;
+  savedviewSegment = false;
 
   slideOpts = {
     on: {
@@ -90,5 +94,25 @@ export class TotalsPage implements OnInit {
       });
     });
   }
+
+  onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>) {
+      console.log(event.detail);
+      if (event.detail.value === 'dashboard') {
+          this.dashboardSegment = true;
+      } else {
+        this.dashboardSegment = false;
+      }
+      if (event.detail.value === 'receipts') {
+          // this.receiptViewSegment = true;
+          this.dashboardSegment = true;
+      } else {
+        this.receiptViewSegment = false;
+      }
+      if (event.detail.value === 'saved') {
+         this.savedviewSegment = true;
+      } else {
+        this.savedviewSegment = false;
+      }
+    }
 
 }

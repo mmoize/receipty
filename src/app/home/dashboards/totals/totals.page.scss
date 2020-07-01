@@ -55,3 +55,17 @@ ion-toolbar {
 //     text-align: center;
 //     display: inline-block;
 // }
+
+ion-toolbar {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+ion-title {
+    text-align: center;
+}
+
+ion-segment {
+    margin-top: 15px;
+}

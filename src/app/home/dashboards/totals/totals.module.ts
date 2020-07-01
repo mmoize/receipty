@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { TotalsPageRoutingModule } from './totals-routing.module';
 
 import { TotalsPage } from './totals.page';
+import { DashboardsPage } from '../dashboards.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TotalsPageRoutingModule
+    TotalsPageRoutingModule,
+
   ],
-  declarations: [TotalsPage]
+  declarations: [TotalsPage, DashboardsPage]
 })
 export class TotalsPageModule {}

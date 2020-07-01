@@ -35,10 +35,11 @@ export class DashboardsPage implements OnInit {
               ) { }
 
   ngOnInit() {
-    
+    this.receiptService.loadUserReceipts().subscribe(() => {
+      // something here
+    });
 
   }
-
 
 
 
@@ -52,16 +53,16 @@ export class DashboardsPage implements OnInit {
       });
     });
 
-    // this.receiptService.loadUserReceipts().subscribe(() => {
-    //   // something here
-    // });
+    this.receiptService.loadUserReceipts().subscribe(() => {
+      // something here
+    });
     this.receiptsSub = this.receiptService.Receipts.subscribe(resData => {
       this.userReceipts = resData;
     });
   }
-   
 
-  receiptGrap(){
+
+  receiptGrap() {
     const receiptsData = [];
     for (const key in this.userReceipts) {
       if (this.userReceipts.hasOwnProperty(key)) {
