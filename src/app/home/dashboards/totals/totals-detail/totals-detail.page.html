@@ -15,32 +15,53 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="ion-padding">
-    <ion-card > 
-      <ion-card-header>
-        Total Spent
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #barCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
-        Receipts
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #doughnutCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-header>
-        Category
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #lineCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm= "2">
+        <div class="ion-padding">
+          <ion-card > 
+            <div >
+              <ion-img src='assets/total.jpg'></ion-img>
+            </div>
+            <div id='receiptdiv2'>
+              <ion-card-header>
+                Total Spent
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #barCanvas></canvas>
+              </ion-card-content>
+            </div>
+          </ion-card>
+      
+          <ion-card>
+            <div >
+              <ion-img src='assets/receipts.jpg'></ion-img>
+            </div>
+            <div id='receiptdiv3'>
+              <ion-card-header>
+                Receipts
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #doughnutCanvas></canvas>
+              </ion-card-content>
+            </div>
+          </ion-card>
+      
+          <ion-card>
+            <div >
+              <ion-img src='assets/saved.jpg'></ion-img>
+            </div>
+            <div id='receiptdiv4'>
+              <ion-card-header>
+                Category
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #lineCanvas></canvas>
+              </ion-card-content>
+            </div>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

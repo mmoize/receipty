@@ -4,6 +4,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Plugins } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-totals-detail',
@@ -24,11 +26,14 @@ export class TotalsDetailPage implements OnInit {
   barGraphData;
   barGraphDataPoint;
   receiptsData;
+  datefields = [];
+  donutGraphDataPoint;
 
   constructor(private receiptService: ReceiptsServiceService,
               private authService: AuthServiceService,
               private modalCtrl: ModalController,
-    ) { }
+              private datePipe: DatePipe,
+            ) { }
 
   ngOnInit() {
 
@@ -39,7 +44,7 @@ export class TotalsDetailPage implements OnInit {
       this.barChart = new Chart(this.barCanvas.nativeElement, {
         type: 'bar',
         data: {
-          labels: this.barGraphDataPoint,
+          labels: this.datefields,
           datasets: [
             {
               label: 'Amount Spent',
@@ -80,11 +85,11 @@ export class TotalsDetailPage implements OnInit {
       this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
         type: 'doughnut',
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels: this.donutGraphDataPoint,
           datasets: [
             {
               label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
+              data: this.barGraphData,
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -102,7 +107,7 @@ export class TotalsDetailPage implements OnInit {
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: this.donutGraphDataPoint,
           datasets: [
             {
               label: 'My First dataset',
@@ -123,7 +128,7 @@ export class TotalsDetailPage implements OnInit {
               pointHoverBorderWidth: 2,
               pointRadius: 1,
               pointHitRadius: 10,
-              data: [65, 59, 80, 81, 56, 55, 40],
+              data: this.barGraphData,
               spanGaps: false
             }
           ]
@@ -134,6 +139,7 @@ export class TotalsDetailPage implements OnInit {
   }
 
   receiptGrap(){
+    // #barCanvas
     const receiptsData = [];
     for (const key in this.userReceipts) {
       if (this.userReceipts.hasOwnProperty(key)) {
@@ -143,7 +149,6 @@ export class TotalsDetailPage implements OnInit {
       }
     }
     this.barGraphData = receiptsData;
-    console.log('ano ano', receiptsData);
     const receiptsDataPoints = [];
     for (const key in this.userReceipts) {
       if (this.userReceipts.hasOwnProperty(key)) {
@@ -153,7 +158,27 @@ export class TotalsDetailPage implements OnInit {
       }
     }
     this.barGraphDataPoint = receiptsDataPoints;
-    console.log('ano ano', receiptsDataPoints);
+    for (const dates of this.barGraphDataPoint) {
+      console.log('datees', dates);
+      this.datefields.push(this.transFormDate(dates));
+    }
+    console.log('ano ano', this.datefields);
+
+   // doughnutCanvas
+    const donutReceiptsData = [];
+    for (const key in this.userReceipts) {
+     if (this.userReceipts.hasOwnProperty(key)) {
+      donutReceiptsData.push(
+         this.userReceipts[key].category,
+       );
+     }
+   }
+    this.donutGraphDataPoint = donutReceiptsData;
+
+  }
+
+  transFormDate(date) {
+        return this.datePipe.transform(date, 'shortTime' );
   }
 
 

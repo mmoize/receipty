@@ -17,25 +17,40 @@
   <ion-grid *ngIf="dashboardSegment" >
     <ion-row>
       <ion-col  size="12" size-sm="8" offset-sm= "2">
-        <ion-card routerLink="/home/totals-detail" color="danger">
-          <ion-card-title routerLink="/home/totals-detail" >Totals</ion-card-title>
-          <h1>{{ userReceiptCal?.Total_spending |currency }}</h1>
+        <ion-card id="totalCard" routerLink="/home/totals-detail" >
+          <div id="receiptdiv">
+            <ion-img src='assets/total.jpg'></ion-img>
+          </div>
+          <div id="receiptdiv2">
+            <h1>Totals</h1>
+            <h1>{{ userReceiptCal?.Total_spending |currency }}</h1>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col   size="12" size-sm="8" offset-sm= "2">
+        <ion-card id="receiptCard" routerLink="/home/totals-detail" >
+          <div id="receiptdiv">
+            <ion-img src='assets/receipts.jpg'></ion-img>
+          </div>
+          <div id="receiptdiv2">
+            <h1>Receipts</h1>
+            <h1>{{ userReceiptCal?.Number_of_Receipt }}</h1>
+          </div>
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col  size="12" size-sm="8" offset-sm= "2">
-        <ion-card routerLink="/home/totals-detail" color="danger">
-          <ion-card-title>Receipts</ion-card-title>
-          <h1>{{ userReceiptCal?.Number_of_Receipt }}</h1>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col  size="12" size-sm="8" offset-sm= "2">
-        <ion-card routerLink="/home/totals-detail" color="danger">
-          <ion-card-title>Saved</ion-card-title>
-          <h1>{{ userReceiptCal?.No_favourate_receipt }}</h1>
+        <ion-card id="savedCard" routerLink="/home/totals-detail" >
+          <div id="receiptdiv">
+            <ion-img src='assets/saved.jpg'></ion-img>
+          </div>
+          <div id="receiptdiv2">
+            <h1>Saved</h1>
+            <h1>{{ userReceiptCal?.No_favourate_receipt }}</h1>
+          </div>
         </ion-card>
       </ion-col>
     </ion-row>

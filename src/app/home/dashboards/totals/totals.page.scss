@@ -17,7 +17,8 @@ ion-card {
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-}
+    position: relative;
+}   
 
 ion-content {
     padding: 0px;
@@ -27,6 +28,14 @@ ion-content {
 #toolbarIcons{
     font-size: 50px;
 }
+h1 {
+    background-color: transparent;
+}
+
+ion-card-title {
+
+}
+
 
 
 
@@ -68,4 +77,28 @@ ion-title {
 
 ion-segment {
     margin-top: 15px;
+}
+
+
+#totalCard {
+    background-image: url('https://image.freepik.com/free-vector/colorful-sunset-gradient-vector-background_1962-597.jpg');
+
+}
+
+#receiptCard {
+   // background-image: url('https://i.pinimg.com/originals/72/bf/c1/72bfc17df464766463ab8ee2fe4620d9.jpg');
+}
+
+#receiptdiv2 {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-left: 38%;
+    margin-top: 38%;
+}
+
+#savedCard {
+  background-image: url('https://lh3.googleusercontent.com/proxy/gokYM6tY0gnslVWKTv60_bnREFBdljslqKq-vzkc2QLe6bq6RuWSUd3fv5_Pq2slCRVcsGsr9R6IHEQUvIFx-SzYtPMPIHTB87wCHdTgS3g78Ki-M_zstRfHeMGTLy8B7Kvz');
 }

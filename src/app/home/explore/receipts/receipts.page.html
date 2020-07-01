@@ -53,6 +53,9 @@
   <ion-grid  id="middleGrid">
     <ion-row>
       <ion-col>
+        <ion-card-header>
+          <ion-card-title>Recent</ion-card-title>
+        </ion-card-header>
         <ion-card *ngFor="let data of receiptsData" >
           <ion-item>
               <ion-icon class="bigger" slot="start"  [src]="data[0]" ></ion-icon>
@@ -103,7 +106,6 @@
                     <ion-select-option value="Travel">Travel</ion-select-option>
                     <ion-select-option value="Entertainment">Entertainment</ion-select-option>
                     <ion-select-option value="Other">Other</ion-select-option>
-                    <ion-select-option value="Education">Education</ion-select-option>
                   </ion-select>
                   <!-- <ion-input formControlName="category" placeholder="put category"></ion-input> -->
                 </ion-item>
