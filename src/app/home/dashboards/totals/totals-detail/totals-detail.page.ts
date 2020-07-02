@@ -41,6 +41,8 @@ export class TotalsDetailPage implements OnInit {
 
   ionViewDidEnter() {
     setTimeout(() => {
+      Chart.defaults.global.defaultFontColor = '#d3cae9';
+      Chart.defaults.global.defaultFontSize = 15;
       this.barChart = new Chart(this.barCanvas.nativeElement, {
         type: 'bar',
         data: {
@@ -50,22 +52,35 @@ export class TotalsDetailPage implements OnInit {
               label: 'Amount Spent',
               data: this.barGraphData,
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgb(182, 107, 5, 0.5)',
+                'rgb(72, 0, 126, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgb(109, 14, 185, 0.5)',
+                'rgb(95, 211, 74, 0.5)',
+                'rgb(182, 107, 5, 0.5)',
+                'rgb(72, 0, 126, 0.5)'
               ],
               borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255,99,132,50)',
+                'rgba(54, 162, 235, 50)',
+                'rgb(177, 72, 38, 50)',
+                'rgb(37, 8, 136, 50)',
+                'rgba(255, 206, 86, 50)',
+                'rgba(75, 192, 192, 50)',
+                'rgba(153, 102, 255, 50)',
+                'rgba(255, 159, 64, 50)',
+                'rgb(123, 0, 97, 50)',
+                'rgb(21, 227, 108, 50)',
+                'rgb(177, 72, 38, 50)',
+                'rgb(37, 8, 136, 50)'
+
               ],
-              borderWidth: 1
+              borderWidth: 2
             }
           ]
         },
@@ -78,10 +93,15 @@ export class TotalsDetailPage implements OnInit {
                 }
               }
             ]
+          },
+          legend: {
+            labels: {
+              fontColor: '#d3cae9'
+            }
           }
         }
       });
-
+      Chart.defaults.doughnut.circumference = 4 * Math.PI;
       this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
         type: 'doughnut',
         data: {
@@ -91,12 +111,12 @@ export class TotalsDetailPage implements OnInit {
               label: 'Categories',
               data: this.barGraphData,
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
                 'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)'
               ],
               hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF6384', '#36A2EB', '#FFCE56']
             }
@@ -110,7 +130,7 @@ export class TotalsDetailPage implements OnInit {
           labels: this.donutGraphDataPoint,
           datasets: [
             {
-              label: 'My First dataset',
+              label: 'spending over time coming soon',
               fill: false,
               lineTension: 0.1,
               backgroundColor: 'rgba(75,192,192,0.4)',
@@ -137,6 +157,10 @@ export class TotalsDetailPage implements OnInit {
 
     }, 3000);
   }
+  ionViewWillLeave() {
+    this.barGraphDataPoint = [];
+    this.donutGraphDataPoint = [];
+   }
 
   receiptGrap() {
     // #barCanvas

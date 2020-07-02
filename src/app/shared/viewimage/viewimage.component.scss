@@ -1,8 +1,9 @@
 ion-grid {
   height: 100%;
   width: 100%;
+  margin: 0;
+  position: relative;
   text-align: center;
-  margin: 0px;
 
 }
 
@@ -31,12 +32,11 @@ p {
   
   // }
 
-  ion-card {
-    height: 100vh;
+  #firstCard {
+    height: 70%;
 
-    margin: 0px;
+    margin: 4px;
     text-align: center;
-    // display: inline-block;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,109 +48,17 @@ ion-content {
   padding: 0px;
   margin: 0px;
 }
-  
 
-  
-  // ion-card {
-  
-  //   display: inline-block;
-  //   padding: 0px;
-  //   width: fit-content;
-  //   border-radius: 10px;
-  //   margin-left: 20px;
-  // }
-  ion-label:nth-child(1) {
-    font-family: monospace;
-  }
-  
-  
-  #icons1 {
-    background-color: transparent;
-    background: transparent;
-    
-  }
-  #icons2 {
-    background-color: transparent;
-    background: transparent;
-    padding-left: 60%;
-  }
-  
-  
-  
-  #bottom-row > ion-col:nth-child(1) > button {
-    padding: 0px;
-    background: transparent;
-  }
-  
-  #bottom-row > ion-col:nth-child(2) > button {
-    padding: 0px;
-    background: transparent;
-  }
-  
-  ion-label {
-    --background: transparent;
-    text-align: left;
-  }
-  
-  div.item-native {
-    --background: transparent;
-  }
-  
-  ion-list {
-    padding: 0px;
-    margin: 0px;
-    height: 20%;
-  }
-  
-  .list-md {
-    padding: 0px;
-    margin: 0px;
-    background-color: transparent;
-  }
-  
-  
-  .list-ios {
-    padding: 0px;
-    margin: 0px;
-    background-color: transparent;
-  }
-  
-  ion-card-content {
-    height: fit-content;
-    padding: 0px;
-  }
-  
-  ion-icon {
-    size: 60px;
-  }
-  
-
-  
-  
-  .pin {
-    display: inline-block;
-    margin: 0 2px 10px;
-    padding: 5px;
-  }
-  
-  .pins {
-    column-count: 3;
-  }
-
-#secondgrid {
-    // height: 100%;
-    width: 100%;
-    text-align: center;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+ion-img  {
+  object-fit: cover;
 }
-
-#secondcard {
-     height: 15vh;
-    padding: none;
-    text-align: center;
-    display: inline-block;
+  
+#secondCard {
+  border-radius: 10px;
+  margin-top: 10px;
+}
+  
+ion-item {
+  object-fit: cover;
+  text-align: left;
 }

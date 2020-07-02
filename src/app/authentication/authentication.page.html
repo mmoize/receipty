@@ -1,16 +1,9 @@
-<ion-content >
-  <ion-grid>
+<!-- <ion-content  >
+  <ion-grid >
     <form [formGroup]="form">
     <ion-row>
       <ion-col size ="12" size-sm="8" offset-sm ="2">
        <ion-card >
-         <ion-card-header color="primary"  text-center > 
-           <ion-card-title>
-            <ion-label>
-              <h1>Authentication</h1>
-            </ion-label>
-           </ion-card-title>
-         </ion-card-header>
          <ion-card-content>
            <ion-col size ="12" size-sm="8" offset-sm ="2">
             <ion-item>
@@ -38,5 +31,43 @@
     </ion-row>
   </form>
   <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner> 
+  </ion-grid>
+
+</ion-content> -->
+
+<ion-content  >
+  <ion-grid id ="secondgrid" >
+        <div>
+          <img src='assets/receipts.jpg'>
+        </div>
+        <form [formGroup]="form">
+          <ion-row  *ngIf="letAuthenticate">
+            <ion-col size ="12" size-sm="8" offset-sm ="2">
+             <ion-card >
+               <ion-card-content>
+                 <ion-col size ="12" size-sm="8" offset-sm ="2">
+                  <ion-item>
+                    <ion-input type="text" *ngIf="!islogin" formControlName="username" placeholder="username"></ion-input>
+                   </ion-item>
+                   <ion-item>
+                    <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+                   </ion-item>
+                   <ion-item>
+                    <ion-input type="password" formControlName="password" placeholder="password"></ion-input>
+                   </ion-item>
+                 </ion-col >
+                  <ion-button (click)="switchAuthentication()" expand="full" fill="none" color="success" >
+                    <h3>switch to {{ islogin ? 'signup' : 'Login' }}</h3>
+                  </ion-button>
+      
+               </ion-card-content>
+                      <ion-button (click)="authenticate()" expand="block" color="danger" >
+                        <h3>{{ islogin ? 'Login' : 'Signup' }}</h3>
+                      </ion-button>
+             </ion-card>
+            </ion-col>
+          </ion-row>
+        </form>
+        <ion-button id="getitbtn" color="danger" *ngIf="!letAuthenticate" (click)="onLetsAuthenticate()"><h1>get in</h1></ion-button>
   </ion-grid>
 </ion-content>

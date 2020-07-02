@@ -16,6 +16,7 @@ import { TotalsDetailPage } from './totals-detail.page';
     TotalsDetailPageRoutingModule
   ],
   declarations: [TotalsDetailPage],
-  providers: [DatePipe]
+  providers: [DatePipe],
+  exports: [  ]
 })
 export class TotalsDetailPageModule {}

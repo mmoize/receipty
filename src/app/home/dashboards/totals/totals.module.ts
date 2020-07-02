@@ -8,6 +8,7 @@ import { TotalsPageRoutingModule } from './totals-routing.module';
 
 import { TotalsPage } from './totals.page';
 import { DashboardsPage } from '../dashboards.page';
+import { TotalsDetailPageModule } from './totals-detail/totals-detail.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { DashboardsPage } from '../dashboards.page';
     TotalsPageRoutingModule,
 
   ],
-  declarations: [TotalsPage, DashboardsPage]
+  declarations: [TotalsPage,]
 })
 export class TotalsPageModule {}

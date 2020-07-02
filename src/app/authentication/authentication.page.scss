@@ -6,8 +6,10 @@
   ion-grid {
     margin-top: 30vh;
     text-align: center;
-    height: 100vh;
     position: relative;
+    height: 100%;
+    width: 100%;
+ 
 
   }
   ion-card {
@@ -16,8 +18,47 @@
     position: absolute;
     top: 0;
     margin: 0;
-    top: 50%;
+    top: 50vh;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);  
+    background-color: transparent;
+  }
+
+ 
+  #secondgrid {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    margin: 0px;
+    
+  }
+
+
+  div {
+    object-fit: fill;
+    position: absolute;
+    margin: 0px;
+    height: 100vh;
+  }
+
+  img {
+    object-fit: fill;
+    height: 100%;
+    width: 100%;
+  }
+
+
+  ion-card-content {
+    background-color: transparent;
+  }
+
+  div.item {
+    background-color: transparent;
+  }
+
+
+  #getitbtn {
+    margin-top: 50vh;
   }

@@ -1,3 +1,4 @@
+import { ViewimageComponent } from './../../../shared/viewimage/viewimage.component';
 import { switchMap } from 'rxjs/operators';
 import { DashboardsPage } from './../../dashboards/dashboards.page';
 import { ReceiptsServiceService } from './receipts-service.service';
@@ -327,7 +328,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     setTimeout(() => {
       this.receiptService.loadUserRecentReceipts().subscribe(() => {});
       this.addSvg();
-    }, 3000);
+    }, 2000);
 
     this.authService.userToken.subscribe(token => {
       const tokens = token;
@@ -355,6 +356,8 @@ export class ReceiptsPage implements OnInit, OnDestroy {
             this.userReceipts[key].category,
             this.userReceipts[key].total_spending,
             this.userReceipts[key].created_at,
+            this.userReceipts[key].pk,
+            this.userReceipts[key].receipt_image_set
           );
         } else {
           //
@@ -365,6 +368,8 @@ export class ReceiptsPage implements OnInit, OnDestroy {
             this.userReceipts[key].category,
             this.userReceipts[key].total_spending,
             this.userReceipts[key].created_at,
+            this.userReceipts[key].pk,
+            this.userReceipts[key].receipt_image_set
           );
         } else {
           //
@@ -375,6 +380,8 @@ export class ReceiptsPage implements OnInit, OnDestroy {
           this.userReceipts[key].category,
           this.userReceipts[key].total_spending,
           this.userReceipts[key].created_at,
+          this.userReceipts[key].pk,
+          this.userReceipts[key].receipt_image_set
         );
       } else {
         //
@@ -385,6 +392,8 @@ export class ReceiptsPage implements OnInit, OnDestroy {
         this.userReceipts[key].category,
         this.userReceipts[key].total_spending,
         this.userReceipts[key].created_at,
+        this.userReceipts[key].pk,
+        this.userReceipts[key].receipt_image_set
       );
     } else {
       //
@@ -395,77 +404,105 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       this.userReceipts[key].category,
       this.userReceipts[key].total_spending,
       this.userReceipts[key].created_at,
+      this.userReceipts[key].pk,
+      this.userReceipts[key].receipt_image_set
     );
-  } else {
-    //
-  }
+    } else {
+      //
+    }
           if (this.userReceipts[key].category === 'Transport') {
-      receipty.push('assets/icon/transport.svg');
-      receipty.push(
-      this.userReceipts[key].category,
-      this.userReceipts[key].total_spending,
-      this.userReceipts[key].created_at,
-      );
-  } else {
-    //
-  }
+        receipty.push('assets/icon/transport.svg');
+        receipty.push(
+        this.userReceipts[key].category,
+        this.userReceipts[key].total_spending,
+        this.userReceipts[key].created_at,
+        this.userReceipts[key].pk,
+        this.userReceipts[key].receipt_image_set
+        );
+    } else {
+      //
+    }
           if (this.userReceipts[key].category === 'Utilities') {
-        receipty.push('assets/icon/tool-belt.svg');
-        receipty.push(
-        this.userReceipts[key].category,
-        this.userReceipts[key].total_spending,
-        this.userReceipts[key].created_at,
-      );
-  } else {
-    //
-  }
+          receipty.push('assets/icon/tool-belt.svg');
+          receipty.push(
+          this.userReceipts[key].category,
+          this.userReceipts[key].total_spending,
+          this.userReceipts[key].created_at,
+          this.userReceipts[key].pk,
+          this.userReceipts[key].receipt_image_set
+        );
+    } else {
+      //
+    }
           if (this.userReceipts[key].category === 'Food') {
-        receipty.push('assets/icon/Food.svg');
-        receipty.push(
-        this.userReceipts[key].category,
-        this.userReceipts[key].total_spending,
-        this.userReceipts[key].created_at,
-    );
-  } else {
-    //
-  }
+          receipty.push('assets/icon/Food.svg');
+          receipty.push(
+          this.userReceipts[key].category,
+          this.userReceipts[key].total_spending,
+          this.userReceipts[key].created_at,
+          this.userReceipts[key].pk,
+          this.userReceipts[key].receipt_image_set
+      );
+    } else {
+      //
+    }
           if (this.userReceipts[key].category === 'Travel') {
-      receipty.push('assets/icon/Travel.svg');
-      receipty.push(
-      this.userReceipts[key].category,
-      this.userReceipts[key].total_spending,
-      this.userReceipts[key].created_at,
-  );
-  } else {
-    //
-  }
-          if (this.userReceipts[key].category === 'Entertainment') {
-        receipty.push('assets/icon/Entertainment.svg');
+        receipty.push('assets/icon/Travel.svg');
         receipty.push(
         this.userReceipts[key].category,
         this.userReceipts[key].total_spending,
         this.userReceipts[key].created_at,
+        this.userReceipts[key].pk,
+        this.userReceipts[key].receipt_image_set
     );
-  } else {
-    //
-  }
+    } else {
+      //
+    }
+          if (this.userReceipts[key].category === 'Entertainment') {
+          receipty.push('assets/icon/Entertainment.svg');
+          receipty.push(
+          this.userReceipts[key].category,
+          this.userReceipts[key].total_spending,
+          this.userReceipts[key].created_at,
+          this.userReceipts[key].pk,
+          this.userReceipts[key].receipt_image_set
+
+          
+      );
+    } else {
+      //
+    }
           if (this.userReceipts[key].category === 'Other') {
-        receipty.push('assets/icon/other.svg');
-        receipty.push(
-        this.userReceipts[key].category,
-        this.userReceipts[key].total_spending,
-        this.userReceipts[key].created_at,
-   );
-  } else {
-  //
-  }
+          receipty.push('assets/icon/other.svg');
+          receipty.push(
+          this.userReceipts[key].category,
+          this.userReceipts[key].total_spending,
+          this.userReceipts[key].created_at,
+          this.userReceipts[key].pk,
+          this.userReceipts[key].receipt_image_set
+    );
+    } else {
+    //
+    }
           this.receiptsData.push(receipty);
 
-      }
-   }
+        }
+    }
 
     console.log('this nooons', this.receiptsData);
   }
+
+  openViewImageModal(data) {
+    this.modalCtrl.create({
+      component: ViewimageComponent,
+      componentProps: {userRecentReceipt: data}
+    }).then(modalEl => {
+       modalEl.present();
+       return modalEl.onDidDismiss();
+    });
+  }
+
+
 
 
 

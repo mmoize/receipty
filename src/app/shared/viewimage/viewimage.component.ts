@@ -32,8 +32,10 @@ function base64toBlob(base64Data, contentType) {
   styleUrls: ['./viewimage.component.scss'],
 })
 export class ViewimageComponent implements OnInit {
-
+  @Input() userRecentReceipt;
   @Input() userReceipt;
+  public recentPost = false;
+  @Input()recentReceipt;
   theSelectedReceipt;
 
   public images: ReceiptImage[] = [];
@@ -45,13 +47,34 @@ export class ViewimageComponent implements OnInit {
               private loadingCtrl: LoadingController,
               ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.userRecentReceipt) {
+      this.theSelectedReceipt = this.userRecentReceipt; 
+      this.recentPost = true;
+      console.log('this', this.theSelectedReceipt);
+    } else {
+      this.theSelectedReceipt = this.userReceipt;
+ 
+    }
+  }
 
   ionViewWillEnter() {
-    this.theSelectedReceipt = this.userReceipt;
+    if (this.userRecentReceipt) {
+      this.theSelectedReceipt = this.userRecentReceipt; 
+      this.recentPost = true;
+      console.log('this', this.theSelectedReceipt);
+    } else {
+      this.theSelectedReceipt = this.userReceipt;
+ 
+    }
+    
   }
 
   onCancel() {
+    this.modalCtrl.dismiss();
+  }
+
+  onclose() {
     this.modalCtrl.dismiss();
   }
 

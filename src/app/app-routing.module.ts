@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './authentication/auth.guard';
+import { TotalsDetailPageModule } from './home/dashboards/totals/totals-detail/totals-detail.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

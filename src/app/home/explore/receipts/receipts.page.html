@@ -12,7 +12,7 @@
               <ion-slide>
                 <ion-item (click)="onPickImage()" lines="none" text-center>
                   <ion-card class="divcard" text-center>
-                    <ion-card-title ><h1>Receipt</h1></ion-card-title>
+                    <ion-card-title ><h1>Capture Receipt</h1></ion-card-title>
                     <ion-card-content>
                       <ion-icon color="danger" id="ion-icons" src='assets/icon/camera.svg'></ion-icon>
                     </ion-card-content>
@@ -30,9 +30,9 @@
                 </ion-item>
               </ion-slide>  
               <ion-slide>
-                <ion-item lines="none"  routerLink="/home/totals">
+                <ion-item lines="none"  routerLink="/home/dashboards">
                     <ion-card  class="divcard">
-                      <ion-card-title ><h1>Total</h1></ion-card-title>
+                      <ion-card-title ><h1>Receits</h1></ion-card-title>
                       <ion-card-content>
                         <ion-icon  color="danger" id="ion-icons" src='assets/icon/receipt.svg'></ion-icon>
                       </ion-card-content>
@@ -57,8 +57,8 @@
           <ion-card-title>Recent</ion-card-title>
         </ion-card-header>
         <ion-card *ngFor="let data of receiptsData" >
-          <ion-item>
-              <ion-icon class="bigger" slot="start"  [src]="data[0]" ></ion-icon>
+          <ion-item (click)="openViewImageModal(data)">
+              <ion-icon  class="bigger" slot="start"  [src]="data[0]" ></ion-icon>
             <ion-label>{{ data[1] }}</ion-label>
             <ion-label>{{ data[2] |currency  }}</ion-label>
             <ion-label>{{ data[3] |date }}</ion-label>

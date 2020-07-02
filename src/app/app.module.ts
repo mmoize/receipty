@@ -10,11 +10,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TotalsDetailPageModule } from './home/dashboards/totals/totals-detail/totals-detail.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TotalsDetailPageModule, HttpClientModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,

@@ -21,6 +21,7 @@ import { Plugins } from '@capacitor/core';
 export class AuthenticationPage implements OnInit {
    islogin = true;
    isloading = false;
+   letAuthenticate = false
 
 
   form: FormGroup;
@@ -126,6 +127,10 @@ export class AuthenticationPage implements OnInit {
     }).then(alertEl => {
       alertEl.present();
     });
+  }
+
+  onLetsAuthenticate() {
+    this.letAuthenticate = true;
   }
 
 
