@@ -18,14 +18,14 @@
     box-sizing: border-box;
   }
   
-  body{
-    width:14rem;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: white;
-  }
+  // body{
+  //   width:14rem;
+  //     height: 100vh;
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     background: #763e76;
+  // }
   
   // ---------- C O N T A C T - C A R D ----------
 
@@ -202,7 +202,8 @@
     min-height: 90px;
   }
 
-
-
-
-
+  #mianCard {
+    border-radius: 20px;
+    margin: 15px;
+    box-shadow: lightseagreen;
+  }

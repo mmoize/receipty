@@ -2,11 +2,32 @@ ion-menu {
 
 }
 
-ion-header {
-    background: #6370ff;
+ion-toolbar{
+ background-image: image('assets/saved.jpg');
 }
 
-.toolbar-container {
-    background-color: #6370ff;
+ion-list {
 
+  height: 100vh;
+}
+
+a {
+    background: transparent;
+}
+
+
+item-native {
+    background-color: transparent;
+}
+
+ion-menu-toggle {
+    background: transparent;
+}
+
+#shadow-root {
+    background: transparent;
+}
+
+.root {
+    background: transparent;
 }

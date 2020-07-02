@@ -320,7 +320,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   }
 
   ionViewWillLeave() {
-   this.userReceipts = '';
+   this.receiptsData = [];
   }
 
   ionViewWillEnter() {
@@ -346,12 +346,9 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   addSvg() {
 
     for (const key in this.userReceipts) {
-        // receiptsData.push(this.userReceipts[key].category)
-        // receiptsData.push(this.userReceipts[key].total_spending)
-        // receiptsData.push(this.userReceipts[key].created_at)
+
       if (this.userReceipts.hasOwnProperty(key)) {
           const receipty = [];
-
         if (this.userReceipts[key].category === 'Health') {
             receipty.push('assets/icon/Health.svg');
             receipty.push(

@@ -1,43 +1,39 @@
 ion-card {
-
-
-  padding: none;
   text-align: center;
-  // display: inline-block;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
+  height: 320px;
   position: relative;
+  border-radius: 15px;
 }  
 
 #receiptdiv2 {
   position: absolute;
   top: 0;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 35%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);  
 }
 
 #receiptdiv3 {
   position: absolute;
   top: 0;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 60%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);  
 }
 
 #receiptdiv4 {
   position: absolute;
   top: 0;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 55%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);  
 }

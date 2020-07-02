@@ -1,39 +1,60 @@
-/* Set the width to the full container and center the content */
-ion-select {
-    width: 100%;
-  
-    justify-content: center;
+.label-float {
+  position: relative;
+  padding-top: 13px;
+  &.invalid {
+    label {
+      color: #f53d3d !important;
+    }
+    input {
+      border: 2px solid #f53d3d !important;
+    }
   }
-  
-  /* Set the flex in order to size the text width to its content */
-  ion-select::part(placeholder),
-  ion-select::part(text) {
-    flex: 0 0 auto;
+
+  input {
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    outline: none;
+    min-width: 250px;
+    padding: 15px 20px;
+    font-size: 16px;
+    transition: all 0.1s linear;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -webkit-appearance: none;
+    &:focus {
+      border: 2px solid #3951b2;
+    }
+    &::placeholder {
+      color: transparent;
+    }
   }
-  
-  /* Set the placeholder color and opacity */
-  ion-select::part(placeholder) {
-    color: #20a08a;
-    opacity: 1;
+  label {
+    color: #fff;
+    pointer-events: none;
+    position: absolute;
+    top: calc(50% - 8px);
+    left: 20px;
+    transition: all 0.1s linear;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    background-color: #3880ff;
+    padding-top: 5px;
+    margin-left: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
   }
-  
-  /*
-   * Set the font of the first letter of the placeholder
-   * Shadow parts work with pseudo-elements, too!
-   * https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements
-   */
-  ion-select::part(placeholder)::first-letter {
-    font-size: 24px;
-    font-weight: 500;
-  }
-  
-  /* Set the text color */
-  ion-select::part(text) {
-    color: #545ca7;
-  }
-  
-  /* Set the icon color and opacity */
-  ion-select::part(icon) {
-    color: #971e49;
-    opacity: 1;
-  }
+}
+
+.label-float input:focus + label,
+input:not(:placeholder-shown):not(.invalid) + label {
+  font-size: 13px;
+  top: 0;
+  color: #3951b2;
+}
+.label-float input:not(:focus):not(:placeholder-shown):not(.invalid) + label {
+  font-size: 13px;
+  top: 0;
+  color: #fff;
+}

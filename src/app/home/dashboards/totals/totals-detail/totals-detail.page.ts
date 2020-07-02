@@ -39,7 +39,7 @@ export class TotalsDetailPage implements OnInit {
 
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     setTimeout(() => {
       this.barChart = new Chart(this.barCanvas.nativeElement, {
         type: 'bar',
@@ -81,14 +81,14 @@ export class TotalsDetailPage implements OnInit {
           }
         }
       });
-  
+
       this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
         type: 'doughnut',
         data: {
           labels: this.donutGraphDataPoint,
           datasets: [
             {
-              label: '# of Votes',
+              label: 'Categories',
               data: this.barGraphData,
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -103,7 +103,7 @@ export class TotalsDetailPage implements OnInit {
           ]
         }
       });
-  
+
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
         type: 'line',
         data: {
@@ -134,11 +134,11 @@ export class TotalsDetailPage implements OnInit {
           ]
         }
       });
-      
+
     }, 3000);
   }
 
-  receiptGrap(){
+  receiptGrap() {
     // #barCanvas
     const receiptsData = [];
     for (const key in this.userReceipts) {
@@ -182,7 +182,7 @@ export class TotalsDetailPage implements OnInit {
   }
 
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
 
     setTimeout(() => {
       this.receiptGrap();

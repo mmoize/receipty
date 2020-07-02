@@ -4,8 +4,9 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
   
-  <ion-row>
+ <ion-row>
     <ion-col>
       <ion-item (click)="onclick()" lines="none">
         <ion-icon name="settings-outline"></ion-icon>
@@ -15,7 +16,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm= "2"  >
-        <ion-card>
+        <ion-card id="mianCard">
           <div  class="contact-card">
             <ion-card-header class="contact-card__header-image"> 
               <div class="contact-card__avatar" style="background-image: []">
@@ -31,6 +32,7 @@
                     <ion-card-title>Bio</ion-card-title>
                   </ion-card-header>
                   <ion-card-content>
+                    
                     {{ userProfile?.bio }}
                   </ion-card-content>
                 </ion-card>
@@ -57,41 +59,13 @@
               </div>
             </div>
            </div>
-
-
-            <!-- <ion-row >
-              <ion-col class="ion-align-self-start">
-                <ion-card id="bottomCards">
-                  <div class="ion-text-center">
-                    <h2>Total</h2>
-                    <h1>{{ userReceiptCal?.Total_spending |currency }}</h1>
-                  </div>
-                </ion-card>
-              </ion-col>
-              <ion-col class="ion-align-self-center">
-                <ion-card >
-                  <div class="ion-text-center">
-                    <h2>Receipts</h2>
-                    <h1>{{ userReceiptCal?.Number_of_Receipt }}</h1>
-                  </div>
-                </ion-card>
-              </ion-col>
-              <ion-col class="ion-align-self-end">
-                <ion-card id="bottomCards">
-                    <div class="ion-text-center">
-                      <h2>Saved</h2>
-                      <h1>{{ userReceiptCal?.No_favourate_receipt }}</h1>
-                    </div>
-                </ion-card>
-              </ion-col>
-            </ion-row> -->
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-content>
+<!-- <ion-content>
   <ion-grid  id="ion-grids">
     <div id="secondgrid">
       <ion-row>
@@ -124,4 +98,4 @@
       </ion-row>
     </div>
   </ion-grid>
-</ion-content>
+</ion-content> -->
