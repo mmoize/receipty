@@ -35,10 +35,6 @@ export class DashboardsPage implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.receiptService.loadUserReceipts().subscribe(() => {
-      // something here
-    });
-
   }
 
 
@@ -49,7 +45,6 @@ export class DashboardsPage implements OnInit {
       const tokens = token;
       this.receiptService.userReceiptData(tokens).subscribe(resdata => {
         this.userReceiptCal = resdata;
-        console.log('this itttt', this.userReceiptCal);
       });
     });
 

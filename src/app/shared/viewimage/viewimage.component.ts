@@ -32,13 +32,6 @@ function base64toBlob(base64Data, contentType) {
   styleUrls: ['./viewimage.component.scss'],
 })
 export class ViewimageComponent implements OnInit {
-  @Input() userRecentReceipt;
-  @Input() userReceipt;
-  public recentPost = false;
-  @Input()recentReceipt;
-  theSelectedReceipt;
-
-  public images: ReceiptImage[] = [];
   
 
   constructor(private modalCtrl: ModalController,
@@ -46,6 +39,16 @@ export class ViewimageComponent implements OnInit {
               private storage: Storage,
               private loadingCtrl: LoadingController,
               ) { }
+  @Input() userRecentReceipt;
+  @Input() userReceipt;
+  public recentPost = false;
+  @Input()recentReceipt;
+  theSelectedReceipt;
+
+  public images: ReceiptImage[] = [];
+
+
+  tester = false;
 
   ngOnInit() {
     if (this.userRecentReceipt) {
@@ -127,9 +130,6 @@ export class ViewimageComponent implements OnInit {
      console.log('this is the saved image', this.images);
    });
   }
-
-
-  tester = false;
 
 
 

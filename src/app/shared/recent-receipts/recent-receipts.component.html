@@ -1,0 +1,91 @@
+<ion-content>
+  <ion-grid >
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm= "2">
+          <ion-card id="firstCard" >
+            <ion-card-content>
+            <!-- <ion-card-header>
+              <ion-card-subtitle>{{ theSelectedReceipt.created_at |date }}</ion-card-subtitle>
+            </ion-card-header> -->
+           <ion-img (click)="onCancel()" [src]="theSelectedReceipt[0].receipt_image_set[0].image"></ion-img>
+           
+             <ion-card-subtitle>
+               <ion-row>
+                 <ion-col class="ion-align-self-start">
+                   <button   id="icons1" ion-button icon-start clear large>
+                     <ion-icon color="success" name="save"></ion-icon>
+                   </button>
+                 </ion-col>
+                 <ion-col class="ion-align-self-center">
+                   <button id="icons1" ion-button icon-start clear large>
+                     <ion-icon color="success" name="download-outline"></ion-icon>
+                   </button>
+                 </ion-col>
+                 <ion-col class="ion-align-self-end">
+                   <button id="icons1" (click)="onDelete(theSelectedReceipt[0].pk)" ion-button icon-start clear large>
+                     <ion-icon color="success" name="trash-outline"></ion-icon>
+                   </button>
+                 </ion-col>
+               </ion-row>
+             </ion-card-subtitle>
+           </ion-card-content>
+           <!-- <div id="secondgrid">
+              <ion-row>
+                <ion-col  size="12" size-sm="8" offset-sm= "2">
+                  <ion-card id="secondcard" color="danger">
+                    <h1>Totat Spent</h1>
+                    <ion-label text-right>
+                      {{ theSelectedReceipt.total_spending }}
+                    </ion-label>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col  size="12" size-sm="8" offset-sm= "2">
+                  <ion-card id="secondcard" color="danger">
+                    <h1>Category</h1>
+                    <ion-label text-right>
+                      {{ theSelectedReceipt.category }}
+                    </ion-label>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col  size="12" size-sm="8" offset-sm= "2">
+                  <ion-card id="secondcard" color="danger">
+                    <h1>created</h1>
+                      {{ theSelectedReceipt.created_at |date }}
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+          </div> -->
+         </ion-card>
+         <ion-card id="secondCard">
+           <ion-list>
+            <ion-item lines="none">
+              <ion-label slot="start">Totat Spent</ion-label>
+              <ion-label >
+                {{ theSelectedReceipt[0].total_spending |currency }}
+              </ion-label>
+            </ion-item>
+        
+        
+            <ion-item lines="none">
+              <ion-label slot="start">Category</ion-label>
+              <ion-label >
+                {{ theSelectedReceipt[0].category }}
+              </ion-label>
+            </ion-item>
+        
+            <ion-item lines="none">
+              <ion-label slot="start">created</ion-label>
+              <ion-label >
+                {{ theSelectedReceipt[0].created_at |date }}
+              </ion-label>
+            </ion-item>
+           </ion-list>
+         </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

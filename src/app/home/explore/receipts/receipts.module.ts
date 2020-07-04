@@ -11,6 +11,7 @@ import { ReceiptsPageRoutingModule } from './receipts-routing.module';
 
 import { ReceiptsPage } from './receipts.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RecentReceiptsComponent } from 'src/app/shared/recent-receipts/recent-receipts.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
     ReceiptsPageRoutingModule,
   ],
-  declarations: [ReceiptsPage, CaptureReceiptsComponent],
-  entryComponents: [CaptureReceiptsComponent]
+  declarations: [ReceiptsPage, RecentReceiptsComponent, ],
+  entryComponents: [RecentReceiptsComponent]
 })
 export class ReceiptsPageModule {}

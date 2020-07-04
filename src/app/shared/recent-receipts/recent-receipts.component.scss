@@ -1,0 +1,64 @@
+ion-grid {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+  
+  }
+  
+  
+  p {
+      margin-left: 50px;
+      width: 20vw;
+      background-color: transparent;
+    }
+    
+    ion-item {
+      text-align: center;
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+      --background: transparent;
+    }
+    
+    
+    ion-icon {
+      font-size: 20px; //Preferred size here
+    }
+    
+    // ion-grid {
+    //   height: 100vh;
+    
+    // }
+  
+    #firstCard {
+      height: 70%;
+  
+      margin: 4px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+  }
+  
+  ion-content {
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  ion-img  {
+    object-fit: cover;
+  }
+    
+  #secondCard {
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+    
+  ion-item {
+    object-fit: cover;
+    text-align: left;
+  }

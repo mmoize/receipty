@@ -1,3 +1,4 @@
+import { RecentReceipt } from './recentReceipt.model';
 import { ViewimageComponent } from './../../../shared/viewimage/viewimage.component';
 import { switchMap } from 'rxjs/operators';
 import { DashboardsPage } from './../../dashboards/dashboards.page';
@@ -12,6 +13,7 @@ import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { ActionSheetController, Platform, ModalController, LoadingController } from '@ionic/angular';
 import { Capacitor, Plugins, CameraSource, CameraResultType, FilesystemDirectory, Camera, } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { RecentReceiptsComponent } from 'src/app/shared/recent-receipts/recent-receipts.component';
 
 
 
@@ -48,6 +50,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   postImageFormat;
   userReceipts;
   public photos: Photo[];
+  newkeys = [];
 
   postImage;
   form: FormGroup;
@@ -245,7 +248,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
 
  openCapturedReceiptModal() {
    this.modalCtrl.create({
-     component: CaptureReceiptsComponent,
+     component: RecentReceiptsComponent,
      componentProps: {selectedImage: this.selectedImage}
    }).then(modalEl => {
      modalEl.present();
@@ -347,140 +350,163 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   addSvg() {
 
     for (const key in this.userReceipts) {
-
       if (this.userReceipts.hasOwnProperty(key)) {
           const receipty = [];
         if (this.userReceipts[key].category === 'Health') {
-            receipty.push('assets/icon/Health.svg');
-            receipty.push(
-            this.userReceipts[key].category,
-            this.userReceipts[key].total_spending,
-            this.userReceipts[key].created_at,
-            this.userReceipts[key].pk,
-            this.userReceipts[key].receipt_image_set
+             const icons = 'assets/icon/Health.svg';
+             receipty.push( new RecentReceipt (
+                 this.userReceipts[key].pk,
+                this.userReceipts[key].category,
+                this.userReceipts[key].total_spending,
+                this.userReceipts[key].created_at,
+                this.userReceipts[key].receipt_image_set,
+                icons
+
+             ),
+
           );
         } else {
           //
         // tslint:disable-next-line: align
         } if (this.userReceipts[key].category === 'Education') {
-            receipty.push('assets/icon/Education.svg');
-            receipty.push(
-            this.userReceipts[key].category,
-            this.userReceipts[key].total_spending,
-            this.userReceipts[key].created_at,
-            this.userReceipts[key].pk,
-            this.userReceipts[key].receipt_image_set
-          );
+            const icons = 'assets/icon/Education.svg';
+            receipty.push( new RecentReceipt (
+              this.userReceipts[key].pk,
+             this.userReceipts[key].category,
+             this.userReceipts[key].total_spending,
+             this.userReceipts[key].created_at,
+             this.userReceipts[key].receipt_image_set,
+             icons
+          ),
+
+       );
         } else {
           //
         }
           if (this.userReceipts[key].category === 'Groceries') {
-          receipty.push('assets/icon/grocery-cart.svg');
-          receipty.push(
-          this.userReceipts[key].category,
-          this.userReceipts[key].total_spending,
-          this.userReceipts[key].created_at,
-          this.userReceipts[key].pk,
-          this.userReceipts[key].receipt_image_set
-        );
+              const icons = 'assets/icon/grocery-cart.svg';
+              receipty.push( new RecentReceipt (
+              this.userReceipts[key].pk,
+              this.userReceipts[key].category,
+              this.userReceipts[key].total_spending,
+              this.userReceipts[key].created_at,
+              this.userReceipts[key].receipt_image_set,
+              icons
+            ),
+          );
       } else {
         //
       }
           if (this.userReceipts[key].category === 'Home') {
-        receipty.push('assets/icon/home.svg');
-        receipty.push(
-        this.userReceipts[key].category,
-        this.userReceipts[key].total_spending,
-        this.userReceipts[key].created_at,
-        this.userReceipts[key].pk,
-        this.userReceipts[key].receipt_image_set
-      );
+              const icons = 'assets/icon/home.svg';
+
+              receipty.push( new RecentReceipt (
+              this.userReceipts[key].pk,
+              this.userReceipts[key].category,
+              this.userReceipts[key].total_spending,
+              this.userReceipts[key].created_at,
+              this.userReceipts[key].receipt_image_set,
+              icons
+            ),
+         );
     } else {
       //
     }
           if (this.userReceipts[key].category === 'shopping') {
-      receipty.push('assets/icon/shopping.svg');
-      receipty.push(
-      this.userReceipts[key].category,
-      this.userReceipts[key].total_spending,
-      this.userReceipts[key].created_at,
-      this.userReceipts[key].pk,
-      this.userReceipts[key].receipt_image_set
-    );
-    } else {
-      //
-    }
-          if (this.userReceipts[key].category === 'Transport') {
-        receipty.push('assets/icon/transport.svg');
-        receipty.push(
-        this.userReceipts[key].category,
-        this.userReceipts[key].total_spending,
-        this.userReceipts[key].created_at,
-        this.userReceipts[key].pk,
-        this.userReceipts[key].receipt_image_set
+      const icons = 'assets/icon/shopping.svg';
+      receipty.push( new RecentReceipt (
+              this.userReceipts[key].pk,
+              this.userReceipts[key].category,
+              this.userReceipts[key].total_spending,
+              this.userReceipts[key].created_at,
+              this.userReceipts[key].receipt_image_set,
+              icons
+            ),
         );
     } else {
       //
     }
-          if (this.userReceipts[key].category === 'Utilities') {
-          receipty.push('assets/icon/tool-belt.svg');
-          receipty.push(
+          if (this.userReceipts[key].category === 'Transport') {
+        const icons = 'assets/icon/transport.svg';
+        receipty.push( new RecentReceipt (
+          this.userReceipts[key].pk,
           this.userReceipts[key].category,
           this.userReceipts[key].total_spending,
           this.userReceipts[key].created_at,
-          this.userReceipts[key].pk,
-          this.userReceipts[key].receipt_image_set
+          this.userReceipts[key].receipt_image_set,
+          icons
+        ),
+      );
+    } else {
+      //
+    }
+          if (this.userReceipts[key].category === 'Utilities') {
+          const icons = 'assets/icon/tool-belt.svg';
+          receipty.push( new RecentReceipt (
+            this.userReceipts[key].pk,
+            this.userReceipts[key].category,
+            this.userReceipts[key].total_spending,
+            this.userReceipts[key].created_at,
+            this.userReceipts[key].receipt_image_set,
+            icons
+          ),
         );
     } else {
       //
     }
           if (this.userReceipts[key].category === 'Food') {
-          receipty.push('assets/icon/Food.svg');
-          receipty.push(
-          this.userReceipts[key].category,
-          this.userReceipts[key].total_spending,
-          this.userReceipts[key].created_at,
-          this.userReceipts[key].pk,
-          this.userReceipts[key].receipt_image_set
-      );
+          const icons = 'assets/icon/Food.svg';
+          receipty.push( new RecentReceipt (
+            this.userReceipts[key].pk,
+            this.userReceipts[key].category,
+            this.userReceipts[key].total_spending,
+            this.userReceipts[key].created_at,
+            this.userReceipts[key].receipt_image_set,
+            icons
+          ),
+        );
     } else {
       //
     }
           if (this.userReceipts[key].category === 'Travel') {
-        receipty.push('assets/icon/Travel.svg');
-        receipty.push(
-        this.userReceipts[key].category,
-        this.userReceipts[key].total_spending,
-        this.userReceipts[key].created_at,
-        this.userReceipts[key].pk,
-        this.userReceipts[key].receipt_image_set
-    );
-    } else {
-      //
-    }
-          if (this.userReceipts[key].category === 'Entertainment') {
-          receipty.push('assets/icon/Entertainment.svg');
-          receipty.push(
+        const icons = 'assets/icon/Travel.svg';
+        receipty.push( new RecentReceipt (
+          this.userReceipts[key].pk,
           this.userReceipts[key].category,
           this.userReceipts[key].total_spending,
           this.userReceipts[key].created_at,
-          this.userReceipts[key].pk,
-          this.userReceipts[key].receipt_image_set
-
-          
+          this.userReceipts[key].receipt_image_set,
+          icons
+        ),
       );
     } else {
       //
     }
+          if (this.userReceipts[key].category === 'Entertainment') {
+          const icons = 'assets/icon/Entertainment.svg';
+          receipty.push( new RecentReceipt (
+            this.userReceipts[key].pk,
+            this.userReceipts[key].category,
+            this.userReceipts[key].total_spending,
+            this.userReceipts[key].created_at,
+            this.userReceipts[key].receipt_image_set,
+            icons
+          ),
+        );
+    } else {
+      //
+    }
           if (this.userReceipts[key].category === 'Other') {
-          receipty.push('assets/icon/other.svg');
-          receipty.push(
-          this.userReceipts[key].category,
-          this.userReceipts[key].total_spending,
-          this.userReceipts[key].created_at,
-          this.userReceipts[key].pk,
-          this.userReceipts[key].receipt_image_set
-    );
+          const icons = 'assets/icon/other.svg';
+          receipty.push( new RecentReceipt (
+            this.userReceipts[key].pk,
+            this.userReceipts[key].category,
+            this.userReceipts[key].total_spending,
+            this.userReceipts[key].created_at,
+            this.userReceipts[key].receipt_image_set,
+            icons
+          ),
+        );
     } else {
     //
     }
@@ -488,18 +514,37 @@ export class ReceiptsPage implements OnInit, OnDestroy {
 
         }
     }
-
-    console.log('this nooons', this.receiptsData);
   }
 
   openViewImageModal(data) {
     this.modalCtrl.create({
-      component: ViewimageComponent,
+      component: RecentReceiptsComponent,
       componentProps: {userRecentReceipt: data}
     }).then(modalEl => {
        modalEl.present();
        return modalEl.onDidDismiss();
     });
+  }
+
+
+  onRemove(Pk) {
+     const xData = [];
+    // tslint:disable-next-line: forin
+     for (const key in this.receiptsData) {
+
+       if (this.receiptsData[key][0].pk === Pk) {
+           //
+       } else {
+        this.newkeys.push( [this.receiptsData[key][0]]);
+       }
+
+    }
+
+     xData.push(this.newkeys);
+     const newData = this.receiptsData;
+     const refreshedData = this.newkeys.filter(x => x.pk !== Pk);
+     this.receiptsData = refreshedData;
+     this.newkeys = [];
   }
 
 

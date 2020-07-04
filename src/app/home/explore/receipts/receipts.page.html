@@ -32,7 +32,7 @@
               <ion-slide>
                 <ion-item lines="none"  routerLink="/home/dashboards">
                     <ion-card  class="divcard">
-                      <ion-card-title ><h1>Receits</h1></ion-card-title>
+                      <ion-card-title ><h1>Receipts</h1></ion-card-title>
                       <ion-card-content>
                         <ion-icon  color="danger" id="ion-icons" src='assets/icon/receipt.svg'></ion-icon>
                       </ion-card-content>
@@ -56,13 +56,36 @@
         <ion-card-header>
           <ion-card-title>Recent</ion-card-title>
         </ion-card-header>
-        <ion-card *ngFor="let data of receiptsData" >
-          <ion-item (click)="openViewImageModal(data)">
-              <ion-icon  class="bigger" slot="start"  [src]="data[0]" ></ion-icon>
-            <ion-label>{{ data[1] }}</ion-label>
-            <ion-label>{{ data[2] |currency  }}</ion-label>
-            <ion-label>{{ data[3] |date }}</ion-label>
+        <ion-card id="recentCard" *ngFor="let data of receiptsData" >
+          <ion-item-sliding id="item100">
+            <ion-item (click)="openViewImageModal(data)">        <!--(click)="openViewImageModal(data)" -->
+              <ion-icon  class="bigger" slot="start"  [src]="data[0].icon" ></ion-icon>
+            <ion-label>
+              <h2>{{ data[0].category }}</h2>
+              <h4>{{ data[0].total_spending |currency  }}</h4>
+              <h6>{{data[0].created_at | date }}</h6>
+            </ion-label>
+            <ion-note slot="end">
+              {{ data[0].created_at |  date:'shortTime' }}
+              {{data[0].created_at | date }}
+            </ion-note>
           </ion-item>
+          <!-- <ion-item-options side="start">
+            <ion-item-option>
+              <ion-icon slot="icon-only" name="heart"></ion-icon>
+            </ion-item-option>
+          </ion-item-options> -->
+      
+          <ion-item-options side="end">
+            <ion-item-option (click)="onRemove(data[0].pk)"  color="danger">
+              <h4 style="font-weight: bolder;">Remove</h4>
+              <!-- <ion-icon slot="icon-only" name="trash"></ion-icon> -->
+            </ion-item-option>
+            <!-- <ion-item-option>
+              <ion-icon slot="icon-only" name="star"></ion-icon>
+            </ion-item-option> -->
+          </ion-item-options>
+          </ion-item-sliding>
         </ion-card>
       </ion-col>
     </ion-row>

@@ -79,8 +79,6 @@ export class ProfileSettingsPage implements OnInit {
       this.profileservice.loadUserProfile(tin).subscribe(resDatas => {
         this.userProfile = resDatas;
         this.imageString = this.userProfile.image;
-
-        console.log(this.imageString);
       });
     });
   }
@@ -261,6 +259,10 @@ export class ProfileSettingsPage implements OnInit {
 
     const blob = new Blob(byteArrays, {type: contentType});
     return blob;
+  }
+
+  onReturnToProfile() {
+    this.router.navigateByUrl('/home/profile');
   }
 
 
