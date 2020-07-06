@@ -5,7 +5,7 @@ ion-label {
 
 ion-card {
     border-radius: 10px;
-    background-color: skyblue;
+    
 }
 
 ion-item {
@@ -20,4 +20,9 @@ ion-avatar {
 ion-list-header {
     height: 100%;
     width: 100%;
+}
+
+p {
+    color: red;
+    margin-left: 25px;
 }

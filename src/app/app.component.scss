@@ -31,3 +31,48 @@ ion-menu-toggle {
 .root {
     background: transparent;
 }
+
+ion-content {
+    text-align: center;
+    position: relative;
+    height: 100vh;
+}
+ion-list {
+  position: absolute;
+  top: 0;
+  margin: 0; 
+  background: transparent;
+}
+
+ion-img {
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+}
+
+div {
+    height: 100%;
+    object-fit: fill;
+}
+
+ion-menu-toggle {
+    background: transparent;
+}
+
+ion-item {
+    background: transparent;
+    margin-top: 20px;
+}
+
+ion-label {
+    font-weight: bolder;
+    color: wheat;
+    
+}
+
+
+h2{
+  color: wheat;
+  font-weight: bolder;
+  font-family: sans-serif;
+}

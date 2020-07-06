@@ -37,7 +37,6 @@ export class ReceiptsPage implements OnInit, OnDestroy {
               private receiptService: ReceiptsServiceService,
               private profileService: ProfileserviceService,
               private loadingCtrl: LoadingController,
-              private dashboard: DashboardsPage,
               private sanitizer: DomSanitizer
               ) { }
 
@@ -269,9 +268,13 @@ export class ReceiptsPage implements OnInit, OnDestroy {
       this.showImageReceipt = false;
       setTimeout(() => {
         loadingEl.dismiss();
-        this.dashboard.loadReceipts();
-      }, 5000);
+      }, 4000);
     });
+    this.receiptsData = [];
+    setTimeout(() => {
+      this.receiptService.loadUserRecentReceipts().subscribe(() => {});
+      this.addSvg();
+    }, 4000);
 
  }
 

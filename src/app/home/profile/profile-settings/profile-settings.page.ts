@@ -46,7 +46,7 @@ export class ProfileSettingsPage implements OnInit {
     this.form = new FormGroup({
       username: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required]
+        validators: []
       }),
       f_name: new FormControl(null, {
         updateOn: 'blur',
@@ -58,15 +58,15 @@ export class ProfileSettingsPage implements OnInit {
       }),
       city: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required]
+        validators: []
       }),
       country: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required]
+        validators: []
       }),
       bio: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required]
+        validators: []
       }),
       image: new FormControl(null)
     });
@@ -145,8 +145,6 @@ export class ProfileSettingsPage implements OnInit {
 
   onEdit() {
 
-    console.log(this.formData);
-
     this.authService.userToken.subscribe(token => {
       const tokens = token;
       this.loadingCtrl.create({
@@ -158,7 +156,7 @@ export class ProfileSettingsPage implements OnInit {
         setTimeout(() => {
           loadEl.dismiss();
           this.router.navigateByUrl('/home/profile');
-        }, 5000);
+        }, 3000);
       });
     });
 

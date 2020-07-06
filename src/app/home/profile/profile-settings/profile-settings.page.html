@@ -66,10 +66,20 @@
                 <ion-label position="stacked">First name</ion-label>
                 <ion-input type="text" formControlName="f_name" [placeholder]="userProfile?.f_name"></ion-input>
               </ion-item>
+              <ion-row *ngIf="!form.get('f_name').valid && form.get('f_name').touched">
+                <ion-col size="12" size-sm="8" offset-sm= "2">
+                  <p>First name is required</p>
+                </ion-col>
+              </ion-row>
               <ion-item lines="none">
                 <ion-label position="stacked">Last name</ion-label>
                 <ion-input type="text" formControlName="l_name" [placeholder]="userProfile?.l_name"></ion-input>
               </ion-item>
+              <ion-row *ngIf="!form.get('l_name').valid && form.get('l_name').touched">
+                <ion-col size="12" size-sm="8" offset-sm= "2">
+                  <p> Last name is required</p>
+                </ion-col>
+              </ion-row>
               <ion-item lines="none">
                 <ion-label position="stacked">City</ion-label>
                 <ion-input type="text" formControlName="city" [placeholder]="userProfile?.city"></ion-input>
@@ -90,11 +100,16 @@
             </ion-card>
         </ion-col>
     </ion-row>
+    <ion-row *ngIf="!form.valid">
+      <ion-col color="danger" size="12" size-sm="8" offset-sm= "2">
+          <p>First name and last name are required</p>
+      </ion-col>
+    </ion-row>
   </ion-grid>
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm= "2">
-          <ion-button (click)="onEdit()" expand="block" color="danger">Save</ion-button>
+          <ion-button (click)="onEdit()" expand="block" [disabled]="!form.valid" color="danger">Save</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

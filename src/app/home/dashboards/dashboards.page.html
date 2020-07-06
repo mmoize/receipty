@@ -1,6 +1,17 @@
 
-<ion-content padding=none>
 
+<ion-item lines="none">
+  <ion-buttons slot="start">
+    <ion-menu-button menu="m1"></ion-menu-button>
+  </ion-buttons >
+  <ion-buttons slot="end">
+    <ion-icon color="danger" name="arrow-back" routerLink="/home/totals"></ion-icon>
+  </ion-buttons>
+</ion-item>
+
+
+
+<ion-content padding=none>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -8,9 +19,7 @@
   <ion-row>
     <ion-col>
       <ion-item  lines="none">
-        <ion-buttons>
-          <ion-icon color="danger" name="arrow-back" routerLink="/home/totals"></ion-icon>
-        </ion-buttons>
+
       </ion-item>
     </ion-col>
   </ion-row>

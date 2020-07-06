@@ -1,37 +1,46 @@
 <ion-app>
   <ion-menu side="start" menuId="m1">
-    <ion-header >
+    <!-- <ion-header >
       <ion-toolbar >
         <ion-title>
           <ion-label>Receity</ion-label>
         </ion-title>
       </ion-toolbar>
-    </ion-header>
+    </ion-header> -->
 
-    <ion-content >
+    <ion-content > 
+      <div >
+        <ion-img  src='assets/receipts.jpg'></ion-img>
+      </div>
       <ion-list>
-       <ion-menu-toggle >
-        <ion-item style="background: transparent;" routerLink="/home/explore/receipts">
-          <ion-icon style="background: transparent;" name="home-outline" color="danger" slot="start"></ion-icon>
-          <ion-label style="background: transparent;">Home</ion-label>
-        </ion-item>
-       </ion-menu-toggle>
+        <ion-menu-toggle >
+          <ion-item lines="none" color="transparent" style="background: transparent;" routerLink="/home/explore/receipts">
+            <ion-icon style="background: transparent;" name="home-outline" color="danger" slot="start"></ion-icon>
+            <ion-label style="background: transparent;"><h2>Home</h2></ion-label>
+          </ion-item>
+        </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item routerLink="/home/profile">
+          <ion-item lines="none" color="transparent" routerLink="/home/profile">
             <ion-icon name="person-outline" color="danger" slot="start"></ion-icon>
-            <ion-label>Profile</ion-label>
+            <ion-label><h2>Profile</h2></ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item routerLink="/home/dashboards">
-            <ion-icon name="albums-outline" color="danger"  slot="start"></ion-icon>
-            <ion-label>Dashboard</ion-label>
+          <ion-item lines="none" color="transparent"  routerLink="/home/totals" button>
+            <ion-icon name="newspaper-outline" color="danger" slot="start"></ion-icon>
+            <ion-label><h2>Dashboard</h2></ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item  (click)="onLogout()" button>
+          <ion-item lines="none" color="transparent" routerLink="/home/dashboards">
+            <ion-icon name="receipt-outline" color="danger"  slot="start"></ion-icon>
+            <ion-label><h2>Receipts</h2></ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" color="transparent" (click)="onLogout()" button>
             <ion-icon name="log-out-outline" color="danger" slot="start"></ion-icon>
-            <ion-label>Logout</ion-label>
+            <ion-label><h2>Logout</h2></ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
@@ -39,3 +48,5 @@
   </ion-menu>
   <ion-router-outlet main></ion-router-outlet>
 </ion-app>
+
+

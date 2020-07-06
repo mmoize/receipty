@@ -35,7 +35,44 @@
 
 </ion-content> -->
 
-<ion-content  >
+<ion-content *ngIf="islogin" >
+  <ion-grid id ="secondgrid" >
+        <div>
+          <img src='assets/receipts.jpg'>
+        </div>
+        <form [formGroup]="form">
+          <ion-row  *ngIf="letAuthenticate">
+            <ion-col size ="12" size-sm="8" offset-sm ="2">
+             <ion-card >
+               <ion-card-content>
+                   <ion-item lines ="none" color="transparent">
+                    <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+                   </ion-item>
+                   <ion-item  lines ="none" id="authitems" color="transparent">
+                    <ion-input type="password" formControlName="password" placeholder="password"></ion-input>
+                   </ion-item>
+                   <ion-row *ngIf="!form.get('password').valid && form.get('password').touched">
+                    <ion-col size ="12" size-sm="8" offset-sm ="2">
+                      <p color="danger">Password must 8 or more characters</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-label  id="signupbtn" (click)="switchAuthentication()" expand="full" fill="none"  >
+                    <h3 >switch to {{ islogin ? 'signup' : 'Login' }}</h3>
+                  </ion-label>
+               </ion-card-content>
+                      <ion-button  [disabled]="!form.get('password').valid" id="signinbtn" (click)="authenticate()" expand="block" color="danger" >
+                        <h3>{{ islogin ? 'Login' : 'Signup' }}</h3>
+                      </ion-button>
+             </ion-card>
+            </ion-col>
+          </ion-row>
+        </form>
+        <ion-button  id="getitbtn" color="none" *ngIf="!letAuthenticate" (click)="onLetsAuthenticate()"><h1>get in</h1></ion-button>
+  </ion-grid>
+</ion-content>
+
+
+<ion-content *ngIf="!islogin"  >
   <ion-grid id ="secondgrid" >
         <div>
           <img src='assets/receipts.jpg'>
@@ -46,7 +83,7 @@
              <ion-card >
                <ion-card-content>
                   <ion-item lines ="none" color="transparent" id="authitems">
-                    <ion-input type="text" *ngIf="!islogin" formControlName="username" placeholder="username"></ion-input>
+                    <ion-input type="text" formControlName="username" placeholder="username"></ion-input>
                    </ion-item>
                    <ion-item lines ="none" color="transparent">
                     <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
@@ -54,17 +91,22 @@
                    <ion-item  lines ="none" id="authitems" color="transparent">
                     <ion-input type="password" formControlName="password" placeholder="password"></ion-input>
                    </ion-item>
+                   <ion-row *ngIf="!form.get('password').valid && form.get('password').touched">
+                    <ion-col size ="12" size-sm="8" offset-sm ="2">
+                      <p color="danger">Password must 8 or more characters</p>
+                    </ion-col>
+                  </ion-row>
                   <ion-label  id="signupbtn" (click)="switchAuthentication()" expand="full" fill="none"  >
                     <h3 >switch to {{ islogin ? 'signup' : 'Login' }}</h3>
                   </ion-label>
                </ion-card-content>
-                      <ion-button id="signinbtn" (click)="authenticate()" expand="block" color="danger" >
+                      <ion-button  [disabled]="!form.valid" id="signinbtn" (click)="authenticate()" expand="block" color="danger" >
                         <h3>{{ islogin ? 'Login' : 'Signup' }}</h3>
                       </ion-button>
              </ion-card>
             </ion-col>
           </ion-row>
         </form>
-        <ion-button id="getitbtn" color="none" *ngIf="!letAuthenticate" (click)="onLetsAuthenticate()"><h1>get in</h1></ion-button>
+        <ion-button  id="getitbtn" color="none" *ngIf="!letAuthenticate" (click)="onLetsAuthenticate()"><h1>get in</h1></ion-button>
   </ion-grid>
 </ion-content>

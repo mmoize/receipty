@@ -1,22 +1,16 @@
-<ion-header>
-  <ion-toolbar >
-    <ion-segment (ionChange)="onFilterUpdate($event)">
-      <ion-segment-button value="dashboard">Dashboard</ion-segment-button>
-      <ion-segment-button  value="analytics">Analytics</ion-segment-button>
-      <!-- <ion-segment-button value="saved">Saved</ion-segment-button> -->
-    </ion-segment>
-  </ion-toolbar>
-</ion-header>
+<ion-buttons slot="start">
+  <ion-menu-button menu="m1"></ion-menu-button>
+</ion-buttons>
 
 <ion-content  >
   <ion-row>
-    <!-- <ion-col>
+    <ion-col>
       <ion-segment (ionChange)="onFilterUpdate($event)">
         <ion-segment-button value="dashboard">Dashboard</ion-segment-button>
-        <ion-segment-button routerLink="/home/dashboards" value="receipts">Receipts</ion-segment-button>
-        <ion-segment-button value="saved">Saved</ion-segment-button>
+        <ion-segment-button  value="analytics">Analytics</ion-segment-button>
+        <!-- <ion-segment-button value="saved">Saved</ion-segment-button> -->
       </ion-segment>
-    </ion-col> --> 
+    </ion-col> 
   </ion-row>
   <ion-grid *ngIf="dashboardSegment" >
     <ion-row>

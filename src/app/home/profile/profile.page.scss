@@ -37,11 +37,13 @@
     font-size: 1em;
     line-height: 1.5em;
     text-align: center;
-    background-color: white;
+    background: transparent;
     border-radius: 1em;
-    box-shadow: 0 0 2em rgba(0,0,0,0.125);
+    box-shadow: 0 0 2em rgba(0,0,0,0.150);
     overflow: hidden;
     flex-direction: column;
+    border-radius: 20px;
+    margin: 15px;
     @include transition--smooth;
   
       &:hover{
@@ -53,10 +55,8 @@
         height: 15em;
         padding-top: 1em;
         background-size: cover;
-        background-color: white;
+        background: transparent;
         flex: 0; 
-        background-image: url("https://www.google.com/url?sa=i&url=http%3A%2F%2Fclipart-library.com%2Fclipart%2FBcar69nKi.htm&psig=AOvVaw1kIhn9fp35SSf58-stSf63&ust=1592010600127000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLjEg-uL--kCFQAAAAAdAAAAABAD");
-        
         object-fit: cover;
       }
   
@@ -66,7 +66,7 @@
         margin: auto;
      
         background-size: cover;
-        background-color: #EEEEEE;
+        background-color: transparent;
         border-radius: 100%;
         object-fit: contain;
         flex: 1;
@@ -94,7 +94,7 @@
         }
   
         &:hover{
-          background-color: #FAFAFA;
+          //background-color: #FAFAFA;
         }
   
       }
@@ -102,7 +102,7 @@
       &__footer{
           margin-top: .5em;
           padding: 1em 0;
-          background-color: #FAFAFA;
+          background: transparent;
   
         &__link{
           display: inline-block;
@@ -151,8 +151,7 @@
       }
 
       ion-card-content {
-        border: red;
-        padding: 0px;
+        padding: 5px;
         font-size: 18px;
       }
 
@@ -164,13 +163,13 @@
         height: 150PX;
         padding: 10px;
         margin: 10px;
-        color: yellowgreen;
       }
 
 
 
       ion-card-title {
         font-size: 25px;
+        font-weight: bolder;
       }
 
       #bottomCards {
@@ -206,4 +205,8 @@
     border-radius: 20px;
     margin: 15px;
     box-shadow: lightseagreen;
+  }
+
+  .contact-card__footer{
+    background: transparent;
   }
