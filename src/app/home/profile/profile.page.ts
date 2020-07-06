@@ -43,10 +43,27 @@ export class ProfilePage implements OnInit {
   }
 
   doRefresh(event) {
-    console.log('Begin async operation');
+
+    this.authService.returnUserId().then(resData => {
+      this.userId = resData;
+      const tin = resData;
+      console.log('the issue', resData);
+      this.profileservice.loadUserProfile(tin).subscribe(resDatas => {
+        this.userProfile = resDatas;
+        this.imageString = this.userProfile.image;
+        this.userProfileData.emit(resData);
+      });
+    });
+
+    this.authService.userToken.subscribe(token => {
+      const tokens = token;
+      this.receiptService.userReceiptData(tokens).subscribe(resdata => {
+        this.userReceiptCal = resdata;
+      });
+    });
+
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
   }
@@ -61,8 +78,6 @@ export class ProfilePage implements OnInit {
       this.profileservice.loadUserProfile(tin).subscribe(resDatas => {
         this.userProfile = resDatas;
         this.imageString = this.userProfile.image;
-
-        console.log(this.imageString);
         this.userProfileData.emit(resData);
       });
     });
@@ -71,7 +86,6 @@ export class ProfilePage implements OnInit {
       const tokens = token;
       this.receiptService.userReceiptData(tokens).subscribe(resdata => {
         this.userReceiptCal = resdata;
-        console.log('this itttt', this.userReceiptCal);
       });
     });
 

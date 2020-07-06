@@ -30,7 +30,7 @@ export class CaptureReceiptsComponent implements OnInit {
     this.theSelectedImage = null;
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.theSelectedImage = this.selectedImage;
   }
 

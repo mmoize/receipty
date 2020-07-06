@@ -20,7 +20,8 @@
           <div  class="contact-card">
             <ion-card-header color="transparent" class="contact-card__header-image"> 
               <div class="contact-card__avatar" style="background: transparent;">
-                  <img style='height: 100%; width: 100%; border-radius: 100%; object-fit: cover'  [src]="imageString"/>
+                  <img *ngIf="imageString"  style='height: 100%; width: 100%; border-radius: 100%; object-fit: cover'  [src]="imageString"/>
+                  <ion-img *ngIf="!imageString" style='height: 100%; width: 100%; border-radius: 100%; object-fit: cover'  src='assets/profile-avatar.png' ></ion-img>
               </div>
             </ion-card-header>
             <p class="contact-card__name">{{ userProfile?.username }}</p>

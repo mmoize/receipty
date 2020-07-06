@@ -21,11 +21,10 @@
   <ion-row>
     <ion-col>
       <ion-card  class="imgcol">
-
-        <ion-img
+        <ion-img *ngIf="selectedImage"
           role="button"
           class="image" 
-        [src]="selectedImage" >
+        [src]="selectedImage" > 
         </ion-img>
         <ion-button expand="block" color="success" (click)="onProceed()">
           <h3>Proceed</h3>
@@ -43,6 +42,7 @@
       <ion-list-header>
         <ion-item lines="none">
           <ion-avatar slot="start" >
+            <ion-img *ngIf="!imageString"   src='assets/profile-avatar.png' ></ion-img>
             <ion-img *ngIf="!newImage"  [src]="imageString"></ion-img>
             <ion-img *ngIf="newImage"   [src]="selectedImage"></ion-img>
           </ion-avatar>

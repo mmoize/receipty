@@ -62,6 +62,8 @@ export class ReceiptsPage implements OnInit, OnDestroy {
   private previousAuthState = false;
 
 
+
+
   customActionSheetOptions: any = {
     header: 'Categories',
     subHeader: 'Select your category'
@@ -181,6 +183,7 @@ export class ReceiptsPage implements OnInit, OnDestroy {
            // this.openCapturedReceiptModal();
         }},
         {text: 'Choose from device', handler: () => {
+            //this.getimage();
           this.filePickeRef.nativeElement.click();
         }},
         {text: 'Cancel', role: 'cancel'}
@@ -196,12 +199,53 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     }
     Plugins.Camera.getPhoto({
       quality: 100,
-      source: CameraSource.Prompt,
+      source: CameraSource.Camera,
       correctOrientation: true,
       saveToGallery: true,
       // allowEditing: true,
       // height: 500,
       width: 700,
+      // resultType: CameraResultType.Base64
+      resultType: CameraResultType.Base64,
+    }).then(image => {
+        // tslint:disable-next-line: prefer-const
+        let urlCreator = window.URL || window.webkitURL;
+        const blobDatas = this.b64toBlob(image.base64String, `image/${image.format}`);
+        this.postImageFormat = image.format;
+        const blobData = this.getBlob(image.base64String);
+        this.postImage = blobDatas;
+        console.log('this is your image', blobData);
+        const imageName = 'receipt';
+        this.selectedImage = urlCreator.createObjectURL(blobData);
+        // this.selectedImage = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
+        this.showImageReceipt = true;
+
+    }).catch(error => { // this part collects errors.
+      console.log(error);
+      if (this.usePicker) {
+        this.filePickeRef.nativeElement.click();
+      }
+      return false;
+    });
+  }
+
+  oncloseReceiptCapture() {
+    this.showImageReceipt = false;
+  }
+
+  private getimage() {
+    if (!Capacitor.isPluginAvailable('Camera')) {
+     // this.filePickeRef.nativeElement.click();
+      return;
+    }
+    Plugins.Camera.getPhoto({
+      quality: 100,
+      source: CameraSource.Photos,
+      correctOrientation: true,
+      saveToGallery: true,
+      // allowEditing: true,
+      // height: 500,
+      // width: 700,
       // resultType: CameraResultType.Base64
       resultType: CameraResultType.Base64,
     }).then(image => {

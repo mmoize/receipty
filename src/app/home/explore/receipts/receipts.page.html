@@ -69,7 +69,7 @@
               {{ data[0].created_at |  date:'shortTime' }}
               {{data[0].created_at | date }}
             </ion-note>
-          </ion-item>
+          </ion-item> 
           <!-- <ion-item-options side="start">
             <ion-item-option>
               <ion-icon slot="icon-only" name="heart"></ion-icon>
@@ -99,6 +99,7 @@
           <ion-card  class="imgcol">
     
             <ion-img
+            (click)="oncloseReceiptCapture()"
               role="button"
               class="image" 
             [src]="selectedImage" >
@@ -108,16 +109,16 @@
               <form [formGroup]="form"> 
               <ion-list>
                 <ion-item lines="none">
-                  <ion-label>
+                  <ion-label slot="start">
                     Total Spending
+                  </ion-label >
+                  <ion-label slot="end">
+                    <ion-input formControlName="total_spending" placeholder="amount"> $ </ion-input>
                   </ion-label>
-                  <ion-input formControlName="total_spending" placeholder="$"></ion-input>
                 </ion-item>
-              </ion-list>
-              <ion-list>
                 <ion-item lines="none">
-                  <ion-label>Category</ion-label>
-                  <ion-select formControlName="category" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
+                  <ion-label >Category</ion-label>
+                  <ion-select  formControlName="category" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
                     <ion-select-option value="Groceries">Groceries</ion-select-option>
                     <ion-select-option value="Home">Home</ion-select-option>
                     <ion-select-option value="shopping">shopping'</ion-select-option>
@@ -133,7 +134,7 @@
                   <!-- <ion-input formControlName="category" placeholder="put category"></ion-input> -->
                 </ion-item>
               </ion-list>
-              <ion-button expand="block" color="danger" (click)="onProceed()">
+              <ion-button [disabled]="!form.valid"  expand="block" color="danger" (click)="onProceed()">
                 <h3>Proceed</h3>
               </ion-button>
             </form>
