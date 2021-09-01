@@ -32,8 +32,8 @@ export class ProfileserviceService {
                private http: HttpClient,
                ) { }
 
-  baseUrl = 'https://fleeks.herokuapp.com/api/profiles/';
-  profileEditUrl = 'https://fleeks.herokuapp.com/api/user/';
+  baseUrl = 'https://receity.herokuapp.com/api/profiles/';
+  profileEditUrl = 'https://receity.herokuapp.com/api/user/';
 
    fetchProfile(id) {
     return this.http.get<ProfileData>(`${this.baseUrl}${id}`);

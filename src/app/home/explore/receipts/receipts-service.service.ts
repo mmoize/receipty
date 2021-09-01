@@ -50,11 +50,11 @@ export class ReceiptsServiceService implements OnInit {
 
 
 
-  baseUrl = 'https://fleeks.herokuapp.com/api/receiptview/';
-  postBaseurl = 'https://fleeks.herokuapp.com/api/receipts/';
-  deleteBaseUrl = 'https://fleeks.herokuapp.com/api/delete_receipt/';
-  calUrl = 'https://fleeks.herokuapp.com/api/cal/';
-  recentReceiptURL = 'https://fleeks.herokuapp.com/api/get_recent_receipts/';
+  baseUrl = 'https://receity.herokuapp.com/api/receiptview/';
+  postBaseurl = 'https://receity.herokuapp.com/api/receipts/';
+  deleteBaseUrl = 'https://receity.herokuapp.com/api/delete_receipt/';
+  calUrl = 'https://receity.herokuapp.com/api/cal/';
+  recentReceiptURL = 'https://receity.herokuapp.com/api/get_recent_receipts/';
 
   get Receipts() {
     return this._userReceipts.asObservable();

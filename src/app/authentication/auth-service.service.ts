@@ -41,7 +41,7 @@ export class AuthServiceService implements OnDestroy {
   isLogin = true;
   isLoading = false;
 
-  baseUrl = 'https://fleeks.herokuapp.com/api/users/';
+  baseUrl = 'https://receity.herokuapp.com/api/users/';
 
   getTokenExpirationDate(token: string): Date {
     const decoded = jwt_decode(token);
