@@ -11,7 +11,8 @@ import { AuthServiceService } from './../../../authentication/auth-service.servi
 import { Component, OnInit, OnDestroy, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { ActionSheetController, Platform, ModalController, LoadingController } from '@ionic/angular';
-import { Capacitor, Plugins, CameraSource, CameraResultType, FilesystemDirectory, Camera, } from '@capacitor/core';
+import { Capacitor, Plugins,  } from '@capacitor/core';
+import { CameraSource, CameraResultType} from '@capacitor/camera';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { RecentReceiptsComponent } from 'src/app/shared/recent-receipts/recent-receipts.component';
 

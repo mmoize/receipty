@@ -34,9 +34,10 @@ export class User {
 
     getTokenExpirationDate(token: string): Date {
         const decoded = jwt_decode(token);
-        if (decoded.exp === undefined) { return null; }
+        console.log(decoded, 'results')
+        if (decoded['exp'] === undefined) { return null; }
         const date  = new Date(0);
-        date.setUTCSeconds(decoded.exp);
+        date.setUTCSeconds(decoded['exp']);
         console.log('This is the date of the token', date);
         return date;
     }

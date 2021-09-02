@@ -1,6 +1,8 @@
 import { ProfileserviceService } from './../home/profile/profileservice.service';
 //import * as jwt_decode from 'jwt-decode';
 import jwt_decode from 'jwt-decode';
+import jwtDecode, { JwtPayload } from "jwt-decode";
+
 
 
 
@@ -41,11 +43,14 @@ export class AuthServiceService implements OnDestroy {
   private activeLogoutTimer: any;
   isLogin = true;
   isLoading = false;
+  decoded = jwt_decode
 
   baseUrl = 'https://receity.herokuapp.com/api/users/';
 
   getTokenExpirationDate(token: string): Date {
-    const decoded = jwt_decode(token);
+    //const decoded = jwt_decode(token);
+    const decoded = jwtDecode<JwtPayload>(token);
+
     if (decoded.exp === undefined) { return null; }
     const date  = new Date(0);
     date.setUTCSeconds(decoded.exp);
@@ -53,8 +58,8 @@ export class AuthServiceService implements OnDestroy {
   }
 
   getUserId(token: string) {
-    const decoded = jwt_decode(token);
-    const userId = decoded.id;
+    var decoded = jwt_decode(token);
+    const userId = decoded['id']
     return userId;
   }
 
@@ -127,10 +132,10 @@ export class AuthServiceService implements OnDestroy {
   autoLogin() {
     return from (Plugins.Storage.get({key: 'authData'}))
       .pipe(map(storedData => {
-         if (!storedData || !storedData.value) {
+         if (!storedData || !storedData) {
            return null;
          }
-         const parsedData = JSON .parse(storedData.value) as
+         const parsedData = JSON.parse(storedData['value']) as
          {user_Id: string; username: string;  email: string; token: string; tokenExpirationDate: string };
          const expirationTime = new Date(parsedData.tokenExpirationDate);
          if (expirationTime <= new Date()) {

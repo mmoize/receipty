@@ -5,7 +5,7 @@ import { ReceiptsServiceService } from '../../explore/receipts/receipts-service.
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoadingController, ActionSheetController } from '@ionic/angular';
-import { Plugins, CameraSource, Camera, CameraResultType } from '@capacitor/core';
+import { CameraSource, CameraResultType, Camera} from '@capacitor/camera';
 
 
 @Component({
@@ -40,7 +40,6 @@ export class ProfileSettingsPage implements OnInit {
     timeEnds: '1990-02-20'
   };
 
- colo = this.userProfile?.username;
 
   ngOnInit() {
     this.form = new FormGroup({
