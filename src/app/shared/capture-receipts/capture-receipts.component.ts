@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Input } from '@angular/core';
-import { Plugins, Capacitor, CameraSource,  CameraResultType } from '@capacitor/core';
+//import { Plugins, Capacitor, CameraSource,  CameraResultType } from '@capacitor/core';
 import { ModalController, ActionSheetController, Platform } from '@ionic/angular';
 
 @Component({
