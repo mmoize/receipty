@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
 
-
+import { Storage } from '@capacitor/storage';
 
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -130,12 +130,13 @@ export class AuthServiceService implements OnDestroy {
   }
 
   autoLogin() {
-    return from (Plugins.Storage.get({key: 'authData'}))
+    return from (Storage.get({key: 'authData'}))
       .pipe(map(storedData => {
-         if (!storedData || !storedData) {
+         console.log('res', storedData)
+         if (!storedData || !storedData.value) {
            return null;
          }
-         const parsedData = JSON.parse(storedData['value']) as
+         const parsedData = JSON.parse(storedData.value) as
          {user_Id: string; username: string;  email: string; token: string; tokenExpirationDate: string };
          const expirationTime = new Date(parsedData.tokenExpirationDate);
          if (expirationTime <= new Date()) {
