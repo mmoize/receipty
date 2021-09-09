@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-webpack": "^0.1202.5",
     "@angular-devkit/schematics": "^12.2.5",
     "@angular/compiler-cli": "^12.2.5",
     "@angular/platform-browser": "~12.2.5",
@@ -43,6 +44,7 @@
     "jetifier": "^2.0.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.14.1",
+    "webpack-dev-server": "^3.11.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

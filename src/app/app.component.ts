@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 import { Plugins, Capacitor } from '@capacitor/core';
 import { SplashScreen } from '@capacitor/splash-screen';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -25,11 +26,6 @@ export class AppComponent {
       //     SplashScreen.hide();
       //   }, 1000);
       //  }
-      setTimeout(()=>{
-        SplashScreen.hide({
-          fadeOutDuration: 1000
-        });
-      }, 2000)
     });
   }
 
