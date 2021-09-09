@@ -197,6 +197,7 @@ export class ReceiptsServiceService implements OnInit {
   // tslint:disable-next-line: variable-name
   uplaodUserReceipt(image, imageFormat, total_spending, category, userTokens) {
      // format the data before attaching it to the http-request
+     console.log('this is the image being sent', image);
       return this.uploadReceipt(image, imageFormat, total_spending, category, userTokens);
     }
 

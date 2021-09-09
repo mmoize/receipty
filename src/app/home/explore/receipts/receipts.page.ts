@@ -308,7 +308,9 @@ export class ReceiptsPage implements OnInit, OnDestroy {
     .then(loadingEl => {
       loadingEl.present();
       const imageFormat = this.postImageFormat;
+      
       const image = this.postImage;
+      console.log("image coming from pc ", image)
       this.receiptService.uplaodUserReceipt(image, imageFormat, this.form.value.total_spending, this.form.value.category, this._userToken);
       this.showImageReceipt = false;
       setTimeout(() => {

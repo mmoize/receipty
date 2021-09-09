@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { Plugins, Capacitor } from '@capacitor/core';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +20,16 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (Capacitor.isPluginAvailable('SplashScreen')) {
-        Plugins.SplashScreen.hide();
-       }
+      // if (Capacitor.isPluginAvailable('SplashScreen')) {
+      //   setTimeout(() => {
+      //     SplashScreen.hide();
+      //   }, 1000);
+      //  }
+      setTimeout(()=>{
+        SplashScreen.hide({
+          fadeOutDuration: 1000
+        });
+      }, 2000)
     });
   }
 

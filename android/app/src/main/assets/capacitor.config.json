@@ -1,8 +1,8 @@
 {
-  "appId": "com.receity",
-  "appName": "receity",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "cordova": {}
+	"appId": "com.receity",
+	"appName": "receity",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"cordova": {}
 }
