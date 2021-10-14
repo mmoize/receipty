@@ -205,14 +205,14 @@ export class AuthServiceService implements OnDestroy {
 
 
   async returnUserId() {
-    const { value } = await Plugins.Storage.get({ key : 'authData'}) ;
+    const { value } = await Storage.get({ key : 'authData'}) ;
     const dit = JSON.parse(value);
     const dat = dit.user_id;
     return dat;
   }
 
   async returnUserToken() {
-    const { value } = await Plugins.Storage.get({ key : 'authData'}) ;
+    const { value } = await Storage.get({ key : 'authData'}) ;
     const dit = JSON.parse(value);
     const dat = dit.token;
     return dat;
